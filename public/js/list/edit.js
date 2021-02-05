@@ -14,21 +14,27 @@ const $btn_atual_plus = document.querySelector('#btn_atual_plus');
 const $btn_atual_dash = document.querySelector('#btn_atual_dash');
 const $btn_tot_plus = document.querySelector('#btn_tot_plus');
 const $btn_tot_dash = document.querySelector('#btn_tot_dash');
-const $button_voltar = document.querySelector('.button_voltar');
+const $button_voltar_edit = document.querySelector('#button_voltar_edit');
 
 // const sendToBank = ()
 
 const changePage = $page => {
     if ($page === $list) {
         $list.setAttribute('style', 'display: none;')
-        $edit.removeAttribute('style', 'display: none;')   
+        // $edit.removeAttribute('style')
+        $loading.removeAttribute('style');
     } else if ($page === $edit) {
         $edit.setAttribute('style', 'display: none;')
-        $list.removeAttribute('style', 'display: none;')
+        $list.removeAttribute('style')
     }
 }
 
+$button_voltar_edit.addEventListener('click', () => {
+    changePage($edit);
+})
+
 const setData = $data => {
+    $loading.setAttribute('style', 'display: none;')
     $title_edit.innerHTML = `${$data.nome}`;
     $capa_editar.setAttribute('src', `${$urlServer}images/${$data.nome_id}.jpg`)
     $nome.setAttribute('value', $data.nome);
@@ -40,6 +46,7 @@ const setData = $data => {
     $btn_atual_dash.setAttribute('onclick', `changeEpisode("atual", ${$data.id}, "dash")`);
     $btn_tot_plus.setAttribute('onclick', `changeEpisode("tot", ${$data.id}, "plus")`);
     $btn_tot_dash.setAttribute('onclick', `changeEpisode("tot", ${$data.id}, "dash")`);
+    $edit.removeAttribute('style');
 }
 
 const getData = ($nome_id, $options) => {

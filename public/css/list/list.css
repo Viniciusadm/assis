@@ -67,6 +67,7 @@ main {
 .icon_editar {
     width: 1.3rem;
     height: 1.3rem;
+    cursor: pointer;
 }
 
 .episodio:disabled {
@@ -96,9 +97,17 @@ main {
 }
 
 .button_change:hover {
-    color: tomato;
+    color: rgb(224, 61, 32);
 }
 
 .button_change:focus {
     outline: none;
+}
+
+#img_loading {
+    width: 100vw;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

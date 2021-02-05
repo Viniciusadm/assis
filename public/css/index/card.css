@@ -21,6 +21,10 @@
     height: 3rem;
 }
 
+#button_voltar_index {
+    cursor: pointer;
+}
+
 .button_return {
     display: flex;
     flex-direction: row;

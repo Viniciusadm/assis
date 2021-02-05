@@ -3,6 +3,7 @@ const $urlServer = 'http://viniciusadm.000webhostapp.com/assis/';
 // const $url = 'http://localhost:8000/';
 // const $urlServer = 'http://localhost:8001/';
 let $body = document.querySelector('main');
+const $loading = document.querySelector('#img_loading');
 
 const deactivate = ($id, $type) => {
     const $btn_change = document.querySelector(`#btn_change${$id}`);
@@ -74,6 +75,8 @@ const mountPage = () => {
                         </div>
                     </div>`
             }
+            $loading.setAttribute('style', 'display: none;')
+            $list.removeAttribute('style');
             $body.innerHTML = $conteudo;
             });
         });
