@@ -1,7 +1,7 @@
 const $url = 'http://assis.surge.sh/';
-const $urlServer = 'http://viniciusadm.000webhostapp.com/assis/';
+// const $urlServer = 'http://viniciusadm.000webhostapp.com/assis/';
 // const $url = 'http://localhost:8000/';
-// const $urlServer = 'http://localhost:8001/';
+const $urlServer = 'http://localhost:8001/';
 let $body = document.querySelector('main');
 const $loading = document.querySelector('#img_loading');
 
@@ -61,12 +61,12 @@ const mountPage = () => {
                             </div>
                             
                             <div class="head">
-                                <h3 class="titulo">${$assis.nome}</h3>
-                                <input class="episodio" type="text" id="episode${$assis.id}" ep_atual="${$assis.ep_atual}" ep_tot="${$assis.ep_tot}" value="Episódios: ${$assis.ep_atual}/${$assis.ep_tot}" disabled>
+                                <h3 id="titulo${$assis.id}" class="titulo">${$assis.nome}</h3>
+                                <input class="episodio" type="text" id="episode${$assis.id}" value="Episódios: ${$assis.ep_atual}/${$assis.ep_tot}" disabled>
                             </div>
     
                             <div class="div_icon_editar">
-                                <img onclick="edit('${$assis.nome_id}')" class="icon_editar" src="../images/pencil.svg">
+                                <img id="img_capa${$assis.id}" onclick="edit('${$assis.nome_id}')" class="icon_editar" src="../images/pencil.svg">
                             </div>
                         </div>
                         <div class="footer">

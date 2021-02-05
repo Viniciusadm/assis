@@ -1,5 +1,5 @@
-const $urlServer = 'http://viniciusadm.000webhostapp.com/assis/';
-// const $urlServer = 'http://localhost:8001/';
+// const $urlServer = 'http://viniciusadm.000webhostapp.com/assis/';
+const $urlServer = 'http://localhost:8001/';
 const $url = 'http://assis.surge.sh/';
 const $card = document.querySelector('#container_card');
 const $sortCard = document.querySelector('#container_sort_card');

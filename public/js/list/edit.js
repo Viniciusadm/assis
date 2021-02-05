@@ -16,12 +16,9 @@ const $btn_tot_plus = document.querySelector('#btn_tot_plus');
 const $btn_tot_dash = document.querySelector('#btn_tot_dash');
 const $button_voltar_edit = document.querySelector('#button_voltar_edit');
 
-// const sendToBank = ()
-
 const changePage = $page => {
     if ($page === $list) {
         $list.setAttribute('style', 'display: none;')
-        // $edit.removeAttribute('style')
         $loading.removeAttribute('style');
     } else if ($page === $edit) {
         $edit.setAttribute('style', 'display: none;')
@@ -37,7 +34,7 @@ const setData = $data => {
     $loading.setAttribute('style', 'display: none;')
     $title_edit.innerHTML = `${$data.nome}`;
     $capa_editar.setAttribute('src', `${$urlServer}images/${$data.nome_id}.jpg`)
-    $nome.setAttribute('value', $data.nome);
+    $nome.value = $data.nome;
     $nome_id.setAttribute('value', $data.nome_id);
     $nome_id.setAttribute('key', $data.id);
     $ep_atual.setAttribute('value', $data.ep_atual);
@@ -76,16 +73,22 @@ const removeCharacters = $string => {
     return $string;
 }
 
-const submitName = $options => {
+const submitName = ($options, $id, $nome_value) => {
+    const $nome_list = document.querySelector(`#titulo${$id}`);
+    $nome_list.innerText = $nome_value;
     fetch(`${$urlServer}api/edit.php`, $options)
 }
 
 $nome.addEventListener('input', () => {
     $nome_id.setAttribute('value', removeCharacters($nome.value));
+    const $id = $nome_id.getAttribute('key');
+    const $nome_value = $nome.value;
+    const $img_capa = document.querySelector(`#img_capa${$id}`);
+    $img_capa.setAttribute('onclick', `edit('${$nome_id.value}')`);
     $formData = new FormData();
-    $formData.append('nome', $nome.value);
+    $formData.append('nome', $nome_value);
     $formData.append('nome_id', $nome_id.value);
-    $formData.append('id', $nome_id.getAttribute('key'))
+    $formData.append('id', $id)
 
     const $options = {
         method: 'POST',
@@ -93,7 +96,7 @@ $nome.addEventListener('input', () => {
         cache: 'default',
         body: $formData
     }
-    submitName($options);
+    submitName($options, $id, $nome_value);
 })
 
 const episodeFinished = ($episode, $episode_other) => {
@@ -112,6 +115,8 @@ const changeEpisode = ($type, $id, $operation) => {
     }
 
     let $episode = Number($input_episode.getAttribute('value'));
+    const $input_presentation = document.querySelector(`#episode${$id}`);
+    console.log($input_presentation);
 
     if ($type === 'atual') {
         if ($operation === 'plus' && $episode < $episode_other) {
@@ -122,6 +127,7 @@ const changeEpisode = ($type, $id, $operation) => {
             $input_episode.setAttribute('value', $episode - 1);
             $episode--;
         }
+        $input_presentation.value = `Episódios: ${$episode}/${$episode_other}`;
     } else if ($type === 'tot') {
         if ($operation === 'plus') {
             $input_episode.setAttribute('value', $episode + 1);
@@ -131,6 +137,7 @@ const changeEpisode = ($type, $id, $operation) => {
             $input_episode.setAttribute('value', $episode - 1);
             $episode--;
         }
+        $input_presentation.value = `Episódios: ${$episode_other}/${$episode}`;
     }
 
     const $formData = new FormData();
