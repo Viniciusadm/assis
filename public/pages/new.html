@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novo</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <form enctype="multipart/form-data">
+        <label for="nome">Nome</label>
+        <input maxlength="25" type="text" id="nome" required>
+        <br/>
+        <label for="nome_id">ID Nome</label>
+        <input type="text" id="nome_id" required readonly>
+        <br/>
+        <label for="image">Imagem</label>
+        <input type="file" id="image">
+        <br/>
+        <label for="ep_atual">Episódio Atual</label>
+        <input type="text" value="0" maxlength="3" id="ep_atual" pattern="[0-9]+" required>
+        <br/>
+        <label for="ep_tot">Episódios Totais</label>
+        <input type="text" id="ep_tot" maxlength="3" pattern="[0-9]+" required>
+        <br/>
+        <button type="button" id="add">Adicionar</button>
+    </form>
+
+    <script src="../js/new.js"></script>
+</body>
+</html>

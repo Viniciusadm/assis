@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/list/list.css">
+    <link rel="stylesheet" href="../css/list/edit.css">
+    <link rel="stylesheet" href="../css/list/search.css">
+</head>
+<body>
+    <div id="list">
+        <div class="search">
+            <span class="span-button_voltar">
+                <a href="../index.html"><img class="button_voltar" src="../images/arrow-left-white.svg" alt="voltar"></a>
+            </span>
+            <span class="barra">
+                <input id="input-search" type="text" placeholder="Pesquisar">
+            </span>
+        </div>
+        <main></main>
+    </div>
+
+    <div id="edit" style="display: none;">
+        <img class="button_voltar" src="../images/arrow-left-white.svg" alt="voltar">
+        <div id="body_edit">
+            <h1 id="title_edit"></h1>
+            <div id="head_editar">
+                <img id="capa_editar" src="" alt="capa">
+                <div id="nomes">
+                    <label for="nome">Nome</label>
+                    <input maxlength="25" id="nome" type="text">
+                    <label for="nome_id">Nome ID</label>
+                    <input id="nome_id" type="text" disabled>
+                </div>
+            </div>
+            <div class="group_episode">
+                <input maxlength="3" pattern="[0-9]+" class="ep_atual" id="input_atual" type="text" disabled>
+                <div class="buttons-edit">
+                    <button type="button" class="button button_episode" id="btn_atual_plus">+</button>
+                    <button type="button" class="button button_episode" id="btn_atual_dash">-</button>
+                </div>
+            </div>
+            <div class="group_episode">
+                <input maxlength="3" pattern="[0-9]+" class="ep_tot" id="input_tot" type="text" disabled>
+                <div class="buttons-edit">
+                    <button type="button" class="button button_episode" id="btn_tot_dash">-</button>
+                    <button type="button" class="button button_episode" id="btn_tot_plus">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/list/list.js"></script>
+    <script src="../js/list/search.js"></script>
+    <script src="../js/list/edit.js"></script>
+</body>
+</html>

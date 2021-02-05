@@ -1,0 +1,28 @@
+.barra {
+    display: flex;
+    justify-content: center;
+    width: 190px;
+    background-color: white;
+    border-radius: 0.3rem;
+}
+
+.search {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 2.5rem;
+    margin-right: 0.5rem;
+}
+
+#input-search {
+    border: none;
+    border-radius: 0.1rem;
+}
+
+#input-search::placeholder {
+    color: black;
+}
+
+#input-search:focus {
+    outline: none;
+}

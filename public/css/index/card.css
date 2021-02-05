@@ -1,0 +1,157 @@
+.episodeDestaque {
+    font-weight: bold;
+}
+
+#capa {
+    height: 40vh;
+}
+
+#titulo, #ep_atual, #ep_tot {
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
+#titulo, #ep_atual, #ep_tot, #sort, #confirm {
+    font-size: 1rem;
+}
+
+#sort, #confirm {
+    font-size: 0.8rem;
+    width: 6rem;
+    height: 3rem;
+}
+
+.button_return {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    background-color: transparent;
+    border: none;
+}
+
+.button_return:focus {
+    outline: none;
+}
+
+.button_return > img {
+    width: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+
+@media (min-width: 400px) {
+    #capa {
+        height: 45vh;
+    }
+
+    #titulo, #ep_atual, #ep_tot, #sort, #confirm {
+        font-size: 1.2rem;
+    }
+
+    #sort, #confirm {
+        width: 7.2rem;
+    }
+
+    .button_return > img {
+        width: 3rem;
+    }
+}
+
+@media (min-width: 600px) {
+    #capa {
+        height: 50vh;
+    }
+
+    #titulo, #ep_atual, #ep_tot, #sort, #confirm {
+        font-size: 1rem;
+    }
+
+    #sort, #confirm {
+        width: 7.6rem;
+    }
+
+    .button_return > img {
+        width: 4rem;
+    }
+}
+
+@media (min-width: 800px) {
+    #capa {
+        height: 55vh;
+    }
+
+    #titulo, #ep_atual, #ep_tot, #sort, #confirm {
+        font-size: 1.6rem;
+    }
+
+    #sort, #confirm {
+        width: 8.5rem;
+    }
+
+    .button_return > img {
+        width: 4.5rem;
+    }
+}
+
+@media (min-width: 1000px) {
+    #capa {
+        height: 60vh;
+    }
+
+    #titulo, #ep_atual, #ep_tot, #sort, #confirm {
+        font-size: 1.8rem;
+    }
+
+    #sort, #confirm {
+        width: 10rem;
+    }
+
+    .button_return > img {
+        width: 5rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    #capa {
+        height: 65vh;
+    }
+
+    #titulo, #ep_atual, #ep_tot, #sort, #confirm {
+        font-size: 2rem;
+    }
+
+    #sort, #confirm {
+        width: 11rem;
+    }
+
+    .button_return > img {
+        width: 6rem;
+    }
+}
+
+@media (min-width: 1400px) {
+    #capa {
+        height: 70vh;
+    }
+
+    #titulo, #ep_atual, #ep_tot, #sort, #confirm {
+        font-size: 2.5rem;
+    }
+
+    #sort, #confirm {
+        width: 12rem;
+    }
+
+    .button_return > img {
+        width: 6.5rem;
+    }
+}
+
+.info {
+    margin-left: 1rem;
+}
+
+#card {
+    display: flex;
+    flex-direction: row;
+}

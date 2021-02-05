@@ -4,24 +4,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Assis Escolhido</title>
+    <title>Página Inicial</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/index/sort-card.css">
+    <link rel="stylesheet" href="css/index/card.css">
 </head>
 
 <body>
-    <div class="corpo">
-        <div>
-            <h1><img src="images/interrogacao.jpg" alt="Capa" id="capa"></h1>
-            <h2 id="titulo"></h2>
-            <p id="ep_atual"></p>
-            <p id="ep_tot"></p>
-        </div>
+    <div id="img_loading" style="display: none;">
+        <img src="images/loading.svg" alt="loading">
+    </div>
 
-        <form>
-            <input id="nome_id" type="text" style="display: none">
-            <input id="sort" type="button" value="Sortear">
-            <input id="confirm" type="button" value="Confirmar" disabled>
-        </form>
+    <div class="container" id="container_sort_card">
+        <h1 id="principal-title">O que assistir?</h1>
+        <div id="sort-card-buttons">
+            <button id="button_sort_card" class="button button_sort_card"><img src="images/tv.svg" alt="sort"> Sortear</button>
+            <a href="pages/new.html"><button class="button button_sort_card"><img src="images/new.svg" alt="new">Novo</button></a>
+            <a href="pages/list.html"><button class="button button_sort_card"><img src="images/list.svg" alt="list"> Lista</button></a>
+        </div>
+    </div>
+
+    <div class="container" id="container_card" style="display: none;">
+        <div id="card">
+            
+            <button class="button_return">
+                <img src="images/arrow-left-white.svg" alt="voltar">
+            </button>
+            
+            <div>
+                <h1><img alt="Capa" id="capa"></h1>
+            </div>
+
+            <div class="info">
+                <h2 id="titulo"></h2>
+                <p id="ep_atual"></p>
+                <p id="ep_tot"></p>
+                
+                <div id="buttons">
+                    <input class="button" id="nome_id" type="text" style="display: none">
+                    <input class="button" id="sort" type="button" value="Outro">
+                    <input class="button" id="confirm" type="button" value="Confirmar">
+                </div>
+            </div>
+    
+        
+        </div>
     </div>
 
     <script src="js/index.js"></script>

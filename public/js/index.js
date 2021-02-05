@@ -1,5 +1,8 @@
-const $url = 'http://localhost:8000/';
-const $urlServer = 'http://localhost:8001/';
+const $urlServer = 'http://viniciusadm.000webhostapp.com/assis/';
+// const $urlServer = 'http://localhost:8001/';
+const $url = 'http://assis.surge.sh/';
+const $card = document.querySelector('#container_card');
+const $sortCard = document.querySelector('#container_sort_card');
 const $capa = document.querySelector('#capa');
 const $titulo = document.querySelector('#titulo');
 const $ep_atual = document.querySelector('#ep_atual');
@@ -7,26 +10,46 @@ const $ep_tot = document.querySelector('#ep_tot');
 const $nome_id = document.querySelector('#nome_id');
 const $btnSort = document.querySelector('#sort');
 const $btnConfirm = document.querySelector('#confirm');
+const $btnChangePage = document.querySelector('#button_sort_card');
+const $loading = document.querySelector('#img_loading');
+const $return = document.querySelector('.button_return');
 
-$btnSort.addEventListener('click', () => {
+const pegarAssis = ($btn) => {
+    $btn.setAttribute('style' , 'display: none;');
+    $loading.removeAttribute('style');
+    
     const $options = {
         method: 'GET',
         mode: 'cors',
         cache: 'default'
     };
 
-    fetch(`${$urlServer}api/_assis.php`, $options)
+    fetch(`${$urlServer}api/random.php`, $options)
         .then($response => {
             $response.json()
                 .then($itens => {
-                    $capa.setAttribute('src', `${$url}images/${$itens['nome_id']}.jpg`);
+                    $capa.setAttribute('src', `${$urlServer}images/${$itens['nome_id']}.jpg`);
                     $titulo.innerHTML = $itens['nome'];
-                    $ep_atual.innerHTML = `Episódio Atual: ${Number($itens['ep_atual']) + 1}`;
-                    $ep_tot.innerHTML = `Episódios Totais: ${$itens['ep_tot']}`;
+                    $ep_atual.innerHTML = `Próximo Episódio: <span class="episodeDestaque">${Number($itens['ep_atual']) + 1}</span>`;
+                    $ep_tot.innerHTML = `Total: <span class="episodeDestaque">${$itens['ep_tot']}</span>`;
                     $nome_id.value = $itens['nome_id'];
-                    $btnConfirm.removeAttribute('disabled');
+                    $card.removeAttribute('style');
+                    $loading.setAttribute('style' , 'display: none;');
                 });
             });
+};
+
+$return.addEventListener('click', () => {
+    $card.setAttribute('style', 'display: none;');
+    $sortCard.removeAttribute('style');
+})
+
+$btnChangePage.addEventListener('click', () => {
+    pegarAssis($sortCard);
+});
+
+$btnSort.addEventListener('click', () => {
+    pegarAssis($card);
 });
 
 $btnConfirm.addEventListener('click', () => {
@@ -40,7 +63,7 @@ $btnConfirm.addEventListener('click', () => {
         body: formData
     };
     
-    fetch(`${$urlServer}api/_confirm.php`, $options)
+    fetch(`${$urlServer}api/confirm.php`, $options)
         .then($response => {
             if($response.status == 200){
                 window.location.href = `${$url}pages/confirm.html`;
