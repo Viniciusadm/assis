@@ -1,0 +1,59 @@
+#trash {
+    width: 1.3rem;
+    height: 1.3rem;
+    margin-right: 0.5rem;
+    cursor: pointer;
+}
+
+#titulo_confirm {
+    color: red;
+    text-align: center;
+    height: 2rem;
+}
+
+#buttons {
+    display: flex;
+    width: inherit;
+    justify-content: center;
+    margin-top: 1.6rem;
+}
+
+#buttons > * {
+    width: 6rem;
+    height: 2.5rem;
+    background-color: #3e3ee2;
+    border: 2px solid #3232e2;
+}
+
+#buttons > *:hover {
+    background-color: #2323b9;
+}
+
+#buttons > *:focus {
+    outline: none;
+    background-color: #1010af;
+}
+
+#confirm {
+    margin-top: 2rem;
+    width: inherit;
+    opacity: 1;
+}
+
+#div_confirm {
+    height: 11rem;
+    width: 15rem;
+    background-color: rgb(228, 225, 225);
+    border-radius: 0.5rem;
+}
+
+#confirm_body {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    z-index: 1;
+    background-color: rgb(128, 128, 128, 0.6);
+}

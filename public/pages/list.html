@@ -8,8 +8,23 @@
     <link rel="stylesheet" href="../css/list/list.css">
     <link rel="stylesheet" href="../css/list/edit.css">
     <link rel="stylesheet" href="../css/list/search.css">
+    <link rel="stylesheet" href="../css/list/del.css">
 </head>
 <body>
+    <div id="confirm_body" style="display: none;">
+        <div id="div_confirm">
+            <div id="confirm">
+                <div id="title_confirm">
+                    <h4 id="titulo_confirm"></h4>
+                </div>
+                <div id="buttons">
+                    <button id="button_confirm">Sim</button>
+                    <button id="button_not_confirm">Não</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="img_loading">
         <img src="../images/loading.svg" alt="loading">
     </div>
@@ -62,6 +77,7 @@
             </div>
         </div>
     </div>
+    <script src="../js/list/del.js"></script>
     <script src="../js/list/list.js"></script>
     <script src="../js/list/search.js"></script>
     <script src="../js/list/edit.js"></script>

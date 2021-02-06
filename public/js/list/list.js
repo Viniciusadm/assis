@@ -1,6 +1,6 @@
-const $url = 'http://assis.surge.sh/';
+// const $url = 'http://assis.surge.sh/';
 // const $urlServer = 'http://viniciusadm.000webhostapp.com/assis/';
-// const $url = 'http://localhost:8000/';
+const $url = 'http://localhost:8000/';
 const $urlServer = 'http://localhost:8001/';
 let $body = document.querySelector('main');
 const $loading = document.querySelector('#img_loading');
@@ -54,8 +54,8 @@ const mountPage = () => {
                         $button_change = "";
                     }
                     $conteudo +=
-                    `<div class="assis-card">
-                        <div class="header" id='assis${$assis.id}'>
+                    `<div id="assis_card${$assis.id}" class="assis-card">
+                        <div class="header" id="assis${$assis.id}">
                             <div id="div.capa">
                                 <img class="capa-list" src="${$urlServer}images/${$assis.nome_id}.jpg">
                             </div>

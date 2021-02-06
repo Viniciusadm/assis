@@ -1,5 +1,6 @@
 // Título
 const $title_edit = document.querySelector('#title_edit');
+const $titulo_confirm = document.querySelector('#titulo_confirm');
 const $capa_editar = document.querySelector('#capa_editar');
 // Divs
 const $list = document.querySelector('#list');
@@ -31,6 +32,8 @@ $button_voltar_edit.addEventListener('click', () => {
 })
 
 const setData = $data => {
+    $titulo_confirm.innerText = `Deseja excluir ${$data.nome}?`;
+    $button_trash.setAttribute('onclick', `del(${$data.id})`)
     $loading.setAttribute('style', 'display: none;')
     $title_edit.innerHTML = `${$data.nome}`;
     $capa_editar.setAttribute('src', `${$urlServer}images/${$data.nome_id}.jpg`)

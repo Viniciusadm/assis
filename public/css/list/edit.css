@@ -27,7 +27,7 @@
 
 #title_edit {
     font-size: 1.1rem;
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.4rem;
 }
 
 #capa_editar {
@@ -46,7 +46,7 @@
 #group_episodes {
     display: flex;
     flex-direction: row;
-    margin-top: 0.3rem;
+    margin-top: 0.5rem;
 }
 
 #nomes {
@@ -76,10 +76,4 @@
 #title_icon {
     display: flex;
     justify-content: space-between;
-}
-
-#trash {
-    width: 1.3rem;
-    height: 1.3rem;
-    margin-right: 0.5rem;
 }

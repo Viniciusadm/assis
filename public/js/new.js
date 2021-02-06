@@ -1,6 +1,7 @@
 // const $urlServer = 'http://viniciusadm.000webhostapp.com/assis/';
+// const $url = 'http://assis.surge.sh/';
+const $url = 'http://localhost:8000/'
 const $urlServer = 'http://localhost:8001/';
-const $url = 'http://assis.surge.sh/';
 const $nome = document.querySelector('#nome');
 const $nome_id = document.querySelector('#nome_id');
 const $ep_atual = document.querySelector('#ep_atual');
