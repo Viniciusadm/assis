@@ -3,7 +3,7 @@ const $button_trash = document.querySelector('#trash');
 const $button_not_confirm = document.querySelector('#button_not_confirm');
 const $button_confirm = document.querySelector('#button_confirm');
 
-const del = $id => {
+const del = ($id, $nome_id) => {
     $confirm_body.removeAttribute('style');
     
     $button_not_confirm.addEventListener('click', () => {
@@ -13,7 +13,7 @@ const del = $id => {
     $button_confirm.addEventListener('click', () => {
         $confirm_body.setAttribute('style', 'display: none;')
 
-        delDataBase($id);
+        delDataBase($id, $nome_id);
         removeAssis($id)
         changePage($edit);
 
@@ -25,9 +25,10 @@ const removeAssis = $id => {
     $assis_card.setAttribute('style', 'display: none;')
 }
 
-const delDataBase = $id => {
+const delDataBase = ($id, $nome_id) => {
     const $formData = new FormData();
     $formData.append('id', $id)
+    $formData.append('nome_id', $nome_id)
 
     const $options = {
         method: 'POST',
