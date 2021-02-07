@@ -10,10 +10,14 @@ const deactivate = ($id, $type) => {
     const $label_status = document.querySelector(`#label${$id}`);
 
     if ($type === 'activate') {
-        $btn_change.innerHTML = `<button id="btn_change${$id}" class='button_change button_deactivate status2' onclick='deactivate(${$id}, "deactivate");'>Desativar</button>`;
+        $btn_change.setAttribute('class', 'button_change button_deactivate status2');
+        $btn_change.setAttribute('onclick', `deactivate(${$id}, "deactivate")`);
+        $btn_change.innerText = 'Desativar';
         $label_status.innerHTML = `<span id="label${$id}" class="status1">Assistindo</span>`
     } else if ($type === 'deactivate') {
-        $btn_change.innerHTML = `<button id="btn_change${$id}" class='button_change button_activate status1' onclick='deactivate(${$id}, "activate");'>Ativar</button>`;
+        $btn_change.setAttribute('class', 'button_change button_deactivate status1');
+        $btn_change.setAttribute('onclick', `deactivate(${$id}, "activate")`);
+        $btn_change.innerText = 'Ativar';
         $label_status.innerHTML = `<span id="label${$id}" class="status2">Desativado</span>`
     }
 
