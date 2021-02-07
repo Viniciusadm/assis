@@ -3,20 +3,12 @@ const $button_trash = document.querySelector('#trash');
 const $button_not_confirm = document.querySelector('#button_not_confirm');
 const $button_confirm = document.querySelector('#button_confirm');
 
-const del = ($id, $nome_id) => {
-    $confirm_body.removeAttribute('style');
-    
-    $button_not_confirm.addEventListener('click', () => {
-        $confirm_body.setAttribute('style', 'display: none;')
-    })
-
-    $button_confirm.addEventListener('click', () => {
-        $confirm_body.setAttribute('style', 'display: none;')
-
+const del = ($id, $nome_id, $nome) => {
+    $titulo_confirm.innerText = `Deseja excluir ${$nome}?`;
+    floating_screen(() => {
         delDataBase($id, $nome_id);
         removeAssis($id)
         changePage($edit);
-
     })
 }
 

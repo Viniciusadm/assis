@@ -3,10 +3,10 @@ header("Access-Control-Allow-Origin: *");
 require_once realpath(dirname(__FILE__) . "/../config/connection.php");
 
 $id = $_POST['id'];
-$type = $_POST['type'];
+$type_finish = $_POST['type_finish'];
 $type_number = 1;
 
-if ($type === 'finish') {
+if ($type_finish === 'finish') {
     $type_number = 3;
 }
 

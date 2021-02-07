@@ -1,4 +1,4 @@
-// Título
+// Títulos
 const $title_edit = document.querySelector('#title_edit');
 const $titulo_confirm = document.querySelector('#titulo_confirm');
 const $capa_editar = document.querySelector('#capa_editar');
@@ -24,7 +24,7 @@ const $button_finish = document.querySelector('#button_finish');
 // Eventos
 
 $nome.addEventListener('input', () => {
-    $nome_id.setAttribute('value', removeCharacters($nome.value));
+    $nome_id.value = removeCharacters($nome.value);
     const $id = $nome_id.getAttribute('key');
     const $nome_value = $nome.value;
     const $img_capa = document.querySelector(`#img_capa${$id}`);
@@ -101,31 +101,31 @@ const submitName = ($options, $id, $nome_value) => {
 
 const changeEpisode = ($type, $id, $operation) => {
     if ($type === 'atual') {
-        var $input_episode = document.getElementById(`input_atual`);
-        var $episode_other = Number(document.getElementById(`input_tot`).value);
+        var $input_episode = document.querySelector('#input_atual');
+        var $episode_other = Number(document.querySelector('#input_tot').value);
     } else if ($type === 'tot') {
-        var $input_episode = document.getElementById(`input_tot`);
-        var $episode_other = Number(document.getElementById(`input_atual`).value);
+        var $input_episode = document.querySelector('#input_tot');
+        var $episode_other = Number(document.querySelector('#input_atual').value);
     }
 
-    let $episode = Number($input_episode.getAttribute('value'));
+    let $episode = Number($input_episode.value);
     const $input_presentation = document.querySelector(`#episode${$id}`);
 
     if ($type === 'atual') {
         if ($operation === 'plus' && $episode < $episode_other) {
-            $input_episode.setAttribute('value', $episode + 1);
+            $input_episode.value = $episode + 1;
             $episode++;
         } else if ($operation === 'dash' && $episode > 0) {
-            $input_episode.setAttribute('value', $episode - 1);
+            $input_episode.value = $episode - 1;
             $episode--;
         }
         $input_presentation.value = `Episódios: ${$episode}/${$episode_other}`;
     } else if ($type === 'tot') {
         if ($operation === 'plus') {
-            $input_episode.setAttribute('value', $episode + 1);
+            $input_episode.value = $episode + 1;
             $episode++;
         } else if ($operation === 'dash' && $episode > 0 && $episode > $episode_other) {
-            $input_episode.setAttribute('value', $episode - 1);
+            $input_episode.value = $episode - 1;
             $episode--;
         }
         
@@ -162,48 +162,108 @@ const changePage = $page => {
     }
 }
 
+const floating_screen = $callback => {
+    $confirm_body.removeAttribute('style');
+    
+    $button_not_confirm.addEventListener('click', () => {
+        $confirm_body.setAttribute('style', 'display: none;')
+    })
+
+    $button_confirm.addEventListener('click', () => {
+        $confirm_body.setAttribute('style', 'display: none;');
+        $callback();
+    })
+}
+
 // Funções Evento
 
 const finish = ($id, $type_finish) => {
-    const $formData = new FormData();
-    $formData.append('id', $id);
-    $formData.append('type_finish', $type_finish);
 
-    const $options = {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'default',
-        body: $formData
+    if ($type_finish === 'finish') {
+        $titulo_confirm.innerText = `Certeza que deseja finalizar?`;
+        floating_screen(() => {
+            const $formData = new FormData();
+            $formData.append('id', $id);
+            $formData.append('type_finish', $type_finish);
+        
+            const $options = {
+                method: 'POST',
+                mode: 'cors',
+                cache: 'default',
+                body: $formData
+            }
+        
+            fetch(`${$urlServer}api/finish.php`, $options);
+        
+            setFinish($id, $type_finish)
+        })
+    } else if ($type_finish === 'restart') {
+        $titulo_confirm.innerText = `Deseja recomeçar?`;
+        floating_screen(() => {
+            const $formData = new FormData();
+            $formData.append('id', $id);
+            $formData.append('type_finish', $type_finish);
+        
+            const $options = {
+                method: 'POST',
+                mode: 'cors',
+                cache: 'default',
+                body: $formData
+            }
+        
+            fetch(`${$urlServer}api/finish.php`, $options);
+        
+            setFinish($id, $type_finish)
+        })
     }
-
-    fetch(`${$urlServer}api/finish.php`, $options);
-
-    setFinish($id, $type_finish)
 }
 
 const setFinish = ($id, $type_finish) => {
     const $label = document.querySelector(`#label${$id}`);
-
     if ($type_finish === 'finish') {
-        const $type = 'atual';
-        const $btn_change = document.querySelector(`#btn_change${$id}`);
-        const $input_episode_atual = document.getElementById('input_atual');
-        const $episode_tot = Number(document.getElementById('input_tot').value);
-        $button_finish.innerText = 'Recomeçar';
-        $button_finish.setAttribute('class', `status_edit status1`);
-        $button_finish.setAttribute('onclick', `finish(${$id}, 'restart')`);
-        $label.setAttribute('class', 'status3');
-        $label.innerText = 'Finalizado';
-        $btn_change.setAttribute('style', 'display: none;')
-        $input_episode_atual.value = $episode_tot;
-        submitEpisode($id, $episode_tot, $type);
+        finish_finish($id, $label);
     } else if ($type_finish === 'restart') {
-        $button_finish.innerText = 'Finalizar';
-        $button_finish.setAttribute('class', `status_edit status3`);
-        $button_finish.setAttribute('onclick', `finish(${$id}, 'finish')`);
-        $label.setAttribute('class', 'status1');
-        $label.innerText = 'Assistindo';
+        finish_restart($id, $label);
     }
+}
+
+const finish_finish = ($id, $label) => {
+    const $type = 'atual';
+    const $episode_label = document.querySelector(`#episode${$id}`);
+    const $btn_change = document.querySelector(`#btn_change${$id}`);
+    console.log($btn_change);
+    const $input_episode_atual = document.querySelector('#input_atual');
+    const $episode_tot = Number(document.querySelector('#input_tot').value);
+    const $buttons = document.querySelectorAll('.button_episode');
+    $button_finish.innerText = 'Recomeçar';
+    $button_finish.setAttribute('class', `status_edit status1`);
+    $button_finish.setAttribute('onclick', `finish(${$id}, 'restart')`);
+    $btn_change.setAttribute('style', 'display: none;')
+    $input_episode_atual.value = $episode_tot;
+    $episode_label.value = `Episódios: ${$episode_tot}/${$episode_tot}`;
+    $label.setAttribute('class', 'status3');
+    $label.innerText = 'Finalizado';
+    $buttons.forEach($button => {
+        $button.setAttribute('disabled', '');
+    });
+    submitEpisode($id, $episode_tot, $type);
+}
+
+const finish_restart = ($id, $label) => {
+    const $buttons = document.querySelectorAll('.button_episode');
+    const $footer = document.querySelector(`#footer${$id}`);
+    const $button_deactivate = 
+    `<span id="label${$id}" class="status1">Assistindo</span>
+    <button id="btn_change${$id}" class='button_change button_deactivate status2' onclick='deactivate(${$id}, "deactivate");'>Desativar</button>`;
+    $footer.innerHTML = $button_deactivate;
+    $button_finish.innerText = 'Finalizar';
+    $button_finish.setAttribute('class', `status_edit status3`);
+    $button_finish.setAttribute('onclick', `finish(${$id}, 'finish')`);
+    $label.setAttribute('class', 'status1');
+    $label.innerText = 'Assistindo';
+    $buttons.forEach($button => {
+        $button.removeAttribute('disabled');
+    });
 }
 
 const edit = $nome_id => {
@@ -240,20 +300,26 @@ const setData = $data => {
         var $status_function = 'restart';
     }
 
+    if ($status === 3) {
+        const $buttons = document.querySelectorAll('.button_episode');
+        $buttons.forEach($button => {
+            $button.setAttribute('disabled', '');
+        });
+    }
+
     $button_finish.innerText = $status_text;
     $button_finish.setAttribute('class', `${$status_class}`)
     $button_finish.setAttribute('onclick', `finish(${$data.id}, '${$status_function}')`)
 
-    $titulo_confirm.innerText = `Deseja excluir ${$data.nome}?`;
-    $button_trash.setAttribute('onclick', `del(${$data.id}, '${$data.nome_id}')`)
+    $button_trash.setAttribute('onclick', `del(${$data.id}, '${$data.nome_id}', '${$data.nome}')`)
     $loading.setAttribute('style', 'display: none;')
     $title_edit.innerHTML = `${$data.nome}`;
     $capa_editar.setAttribute('src', `${$urlServer}images/${$data.nome_id}.jpg`)
     $nome.value = $data.nome;
-    $nome_id.setAttribute('value', $data.nome_id);
+    $nome_id.value = $data.nome_id;
     $nome_id.setAttribute('key', $data.id);
-    $ep_atual.setAttribute('value', $data.ep_atual);
-    $ep_tot.setAttribute('value', $data.ep_tot);
+    $ep_atual.value = $data.ep_atual;
+    $ep_tot.value = $data.ep_tot;
     $btn_atual_plus.setAttribute('onclick', `changeEpisode("atual", ${$data.id}, "plus")`);
     $btn_atual_dash.setAttribute('onclick', `changeEpisode("atual", ${$data.id}, "dash")`);
     $btn_tot_plus.setAttribute('onclick', `changeEpisode("tot", ${$data.id}, "plus")`);

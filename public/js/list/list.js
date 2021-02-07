@@ -69,7 +69,7 @@ const mountPage = () => {
                                 <img id="img_capa${$assis.id}" onclick="edit('${$assis.nome_id}')" class="icon_editar" src="../images/pencil.svg">
                             </div>
                         </div>
-                        <div class="footer">
+                        <div id="footer${$assis.id}" class="footer">
                             <span id="label${$assis.id}" class="status${$assis.status}">${$status}</span>
                             ${$button_change}
                         </div>
