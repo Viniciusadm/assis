@@ -21,6 +21,28 @@ const $edit_image = document.querySelector('#edit_image');
 const $confirm_edit_image = document.querySelector('#confirm_edit_image');
 const $button_finish = document.querySelector('#button_finish');
 
+// Eventos
+
+$nome.addEventListener('input', () => {
+    $nome_id.setAttribute('value', removeCharacters($nome.value));
+    const $id = $nome_id.getAttribute('key');
+    const $nome_value = $nome.value;
+    const $img_capa = document.querySelector(`#img_capa${$id}`);
+    $img_capa.setAttribute('onclick', `edit('${$nome_id.value}')`);
+    $formData = new FormData();
+    $formData.append('nome', $nome_value);
+    $formData.append('nome_id', $nome_id.value);
+    $formData.append('id', $id)
+
+    const $options = {
+        method: 'POST',
+        mode: 'cors',
+        cache: 'default',
+        body: $formData
+    }
+    submitName($options, $id, $nome_value);
+})
+
 $input_edit_image.addEventListener('change', () => {
     const $capa_load = $input_edit_image.files[0];
     const $fileReader = new FileReader();
@@ -31,16 +53,6 @@ $input_edit_image.addEventListener('change', () => {
     $edit_image.setAttribute('style', 'display: none;')
     $confirm_edit_image.removeAttribute('style');
 })
-
-const changePage = $page => {
-    if ($page === $list) {
-        $list.setAttribute('style', 'display: none;')
-        $loading.removeAttribute('style');
-    } else if ($page === $edit) {
-        $edit.setAttribute('style', 'display: none;')
-        $list.removeAttribute('style')
-    }
-}
 
 $confirm_edit_image.addEventListener('click', () => {
     const $capa_load = $input_edit_image.files[0];
@@ -72,10 +84,90 @@ $button_voltar_edit.addEventListener('click', () => {
     $edit_image.removeAttribute('style');
 })
 
-const finish = ($id, $type) => {
+// Funções Editar (nome/nome_id)
+
+const removeCharacters = $string => {
+    $string = $string.normalize("NFD").replace(/[^0-9a-zA-Zs]/g, "");
+    return $string;
+}
+
+const submitName = ($options, $id, $nome_value) => {
+    const $nome_list = document.querySelector(`#titulo${$id}`);
+    $nome_list.innerText = $nome_value;
+    fetch(`${$urlServer}api/edit.php`, $options)
+}
+
+// Funções Editar (episódios)
+
+const changeEpisode = ($type, $id, $operation) => {
+    if ($type === 'atual') {
+        var $input_episode = document.getElementById(`input_atual`);
+        var $episode_other = Number(document.getElementById(`input_tot`).value);
+    } else if ($type === 'tot') {
+        var $input_episode = document.getElementById(`input_tot`);
+        var $episode_other = Number(document.getElementById(`input_atual`).value);
+    }
+
+    let $episode = Number($input_episode.getAttribute('value'));
+    const $input_presentation = document.querySelector(`#episode${$id}`);
+
+    if ($type === 'atual') {
+        if ($operation === 'plus' && $episode < $episode_other) {
+            $input_episode.setAttribute('value', $episode + 1);
+            $episode++;
+        } else if ($operation === 'dash' && $episode > 0) {
+            $input_episode.setAttribute('value', $episode - 1);
+            $episode--;
+        }
+        $input_presentation.value = `Episódios: ${$episode}/${$episode_other}`;
+    } else if ($type === 'tot') {
+        if ($operation === 'plus') {
+            $input_episode.setAttribute('value', $episode + 1);
+            $episode++;
+        } else if ($operation === 'dash' && $episode > 0 && $episode > $episode_other) {
+            $input_episode.setAttribute('value', $episode - 1);
+            $episode--;
+        }
+        
+        $input_presentation.value = `Episódios: ${$episode_other}/${$episode}`;
+    }
+    submitEpisode($id, $episode, $type);
+}
+
+const submitEpisode = ($id, $episode, $type) => {
     const $formData = new FormData();
     $formData.append('id', $id);
+    $formData.append('episode', $episode);
     $formData.append('type', $type);
+
+    const $options = {
+        method: 'POST',
+        mode: 'cors',
+        cache: 'default',
+        body: $formData
+    };
+
+    fetch(`${$urlServer}api/edit.php`, $options);
+}
+
+// Funções
+
+const changePage = $page => {
+    if ($page === $list) {
+        $list.setAttribute('style', 'display: none;')
+        $loading.removeAttribute('style');
+    } else if ($page === $edit) {
+        $edit.setAttribute('style', 'display: none;')
+        $list.removeAttribute('style')
+    }
+}
+
+// Funções Evento
+
+const finish = ($id, $type_finish) => {
+    const $formData = new FormData();
+    $formData.append('id', $id);
+    $formData.append('type_finish', $type_finish);
 
     const $options = {
         method: 'POST',
@@ -86,27 +178,54 @@ const finish = ($id, $type) => {
 
     fetch(`${$urlServer}api/finish.php`, $options);
 
-    setFinish($id, $type);
+    setFinish($id, $type_finish)
 }
 
-const setFinish = ($id, $type) => {
+const setFinish = ($id, $type_finish) => {
     const $label = document.querySelector(`#label${$id}`);
 
-    if ($type === 'finish') {
+    if ($type_finish === 'finish') {
+        const $type = 'atual';
         const $btn_change = document.querySelector(`#btn_change${$id}`);
+        const $input_episode_atual = document.getElementById('input_atual');
+        const $episode_tot = Number(document.getElementById('input_tot').value);
         $button_finish.innerText = 'Recomeçar';
         $button_finish.setAttribute('class', `status_edit status1`);
         $button_finish.setAttribute('onclick', `finish(${$id}, 'restart')`);
         $label.setAttribute('class', 'status3');
         $label.innerText = 'Finalizado';
         $btn_change.setAttribute('style', 'display: none;')
-    } else if ($type === 'restart') {
+        $input_episode_atual.value = $episode_tot;
+        submitEpisode($id, $episode_tot, $type);
+    } else if ($type_finish === 'restart') {
         $button_finish.innerText = 'Finalizar';
         $button_finish.setAttribute('class', `status_edit status3`);
         $button_finish.setAttribute('onclick', `finish(${$id}, 'finish')`);
         $label.setAttribute('class', 'status1');
         $label.innerText = 'Assistindo';
     }
+}
+
+const edit = $nome_id => {
+    changePage($list);
+    const $options = {
+        method: 'GET',
+        mode: 'cors',
+        cache: 'default'
+    }
+    getData($nome_id, $options);
+}
+
+// Funções Montar Página
+
+const getData = ($nome_id, $options) => {
+    fetch(`${$urlServer}api/assis.php?assis=${$nome_id}`, $options)
+        .then($response => {
+            $response.json()
+                .then($itens => {
+                    setData($itens);
+                })
+        })
 }
 
 const setData = $data => {
@@ -140,105 +259,4 @@ const setData = $data => {
     $btn_tot_plus.setAttribute('onclick', `changeEpisode("tot", ${$data.id}, "plus")`);
     $btn_tot_dash.setAttribute('onclick', `changeEpisode("tot", ${$data.id}, "dash")`);
     $edit.removeAttribute('style');
-}
-
-const getData = ($nome_id, $options) => {
-    fetch(`${$urlServer}api/assis.php?assis=${$nome_id}`, $options)
-        .then($response => {
-            $response.json()
-                .then($itens => {
-                    setData($itens);
-                })
-        })
-}
-
-const edit = $nome_id => {
-    changePage($list);
-    const $options = {
-        method: 'GET',
-        mode: 'cors',
-        cache: 'default'
-    }
-    getData($nome_id, $options);
-}
-
-// Funções Editar (nome/nome_id)
-
-const removeCharacters = $string => {
-    $string = $string.normalize("NFD").replace(/[^0-9a-zA-Zs]/g, "");
-    return $string;
-}
-
-const submitName = ($options, $id, $nome_value) => {
-    const $nome_list = document.querySelector(`#titulo${$id}`);
-    $nome_list.innerText = $nome_value;
-    fetch(`${$urlServer}api/edit.php`, $options)
-}
-
-$nome.addEventListener('input', () => {
-    $nome_id.setAttribute('value', removeCharacters($nome.value));
-    const $id = $nome_id.getAttribute('key');
-    const $nome_value = $nome.value;
-    const $img_capa = document.querySelector(`#img_capa${$id}`);
-    $img_capa.setAttribute('onclick', `edit('${$nome_id.value}')`);
-    $formData = new FormData();
-    $formData.append('nome', $nome_value);
-    $formData.append('nome_id', $nome_id.value);
-    $formData.append('id', $id)
-
-    const $options = {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'default',
-        body: $formData
-    }
-    submitName($options, $id, $nome_value);
-})
-
-const changeEpisode = ($type, $id, $operation) => {
-    if ($type === 'atual') {
-        var $input_episode = document.getElementById(`input_atual`);
-        var $episode_other = Number(document.getElementById(`input_tot`).value);
-    } else if ($type === 'tot') {
-        var $input_episode = document.getElementById(`input_tot`);
-        var $episode_other = Number(document.getElementById(`input_atual`).value);
-    }
-
-    let $episode = Number($input_episode.getAttribute('value'));
-    const $input_presentation = document.querySelector(`#episode${$id}`);
-    console.log($input_presentation);
-
-    if ($type === 'atual') {
-        if ($operation === 'plus' && $episode < $episode_other) {
-            $input_episode.setAttribute('value', $episode + 1);
-            $episode++;
-        } else if ($operation === 'dash' && $episode > 0) {
-            $input_episode.setAttribute('value', $episode - 1);
-            $episode--;
-        }
-        $input_presentation.value = `Episódios: ${$episode}/${$episode_other}`;
-    } else if ($type === 'tot') {
-        if ($operation === 'plus') {
-            $input_episode.setAttribute('value', $episode + 1);
-            $episode++;
-        } else if ($operation === 'dash' && $episode > 0 && $episode > $episode_other) {
-            $input_episode.setAttribute('value', $episode - 1);
-            $episode--;
-        }
-        $input_presentation.value = `Episódios: ${$episode_other}/${$episode}`;
-    }
-
-    const $formData = new FormData();
-    $formData.append('id', $id);
-    $formData.append('episode', $episode);
-    $formData.append('type', $type);
-
-    const $options = {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'default',
-        body: $formData
-    };
-
-    fetch(`${$urlServer}api/edit.php`, $options);
 }
