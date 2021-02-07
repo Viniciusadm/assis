@@ -25,13 +25,24 @@
     cursor: pointer;
 }
 
-#title_edit {
-    font-size: 1.1rem;
-    margin-bottom: 0.4rem;
+#nome_id {
+    color: black;
 }
 
-#capa_editar {
-    width: 7.5rem;
+#input_edit_image {
+    display: none;
+}
+
+.ep {
+    background-color: white;
+    color: black;
+    border: none;
+}
+
+#title_edit {
+    font-size: 1.2rem;
+    margin-bottom: 0.4rem;
+    color: #06739e;
 }
 
 #head_editar {
@@ -76,4 +87,59 @@
 #title_icon {
     display: flex;
     justify-content: space-between;
+}
+
+#div_capa {
+    position: relative;
+    width: 7.5rem;
+}
+
+#capa_editar {
+    width: 100%;
+}
+
+#edit_image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute; 
+    left: 0; 
+    top: 0; 
+    background-color: rgba(0, 0, 0, 0.2); 
+    width:100%; 
+    height: 97.5%;
+}
+
+#edit_image > img {
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+#button_finish {
+    margin-top: 0.7rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+#confirm_edit_image {
+    border: 1px solid black;
+    padding: 0.1rem;
+    background-color: white;
+    border-radius: 0.3rem;
+}
+
+#confirm_edit_image:focus {
+    outline: none;
+}
+
+#confirm_edit_image:hover {
+    background-color: rgb(185, 185, 185);
+}
+
+.status_edit {
+    cursor: pointer;
+}
+
+.status_edit:hover {
+    color: cornsilk;
 }

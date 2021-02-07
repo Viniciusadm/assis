@@ -52,27 +52,32 @@
                 <div id="head_editar">
                     <div id="div_capa">
                         <img id="capa_editar" src="" alt="capa">
-                        <div id="edit_image">
-                            <img src="../images/pencil-black.svg" alt="editar imagem">
-                        </div>
+                        <label for="input_edit_image">
+                            <div id="edit_image">
+                                <img id="pencil_edit" src="../images/pencil-fill.svg" alt="editar imagem">
+                            </div>
+                            <button id="confirm_edit_image" style="display: none;">Confirmar</button>
+                        </label>
+                        <input id="input_edit_image" type="file">
                     </div>
                     <div id="nomes">
                         <label for="nome">Nome</label>
                         <input maxlength="25" id="nome" type="text">
                         <label for="nome_id">Nome ID</label>
                         <input id="nome_id" type="text" disabled>
+                        <p id="button_finish"></p>
                     </div>
                 </div>
                 <div id="group_episodes">
                     <div class="group_episode">
-                        <input maxlength="3" pattern="[0-9]+" class="ep_atual" id="input_atual" type="text" disabled>
+                        <input maxlength="3" pattern="[0-9]+" class="ep ep_atual" id="input_atual" type="text" disabled>
                         <div class="buttons-edit">
                             <button type="button" class="button button_episode" id="btn_atual_plus">+</button>
                             <button type="button" class="button button_episode" id="btn_atual_dash">-</button>
                         </div>
                     </div>
                     <div class="group_episode">
-                        <input maxlength="3" pattern="[0-9]+" class="ep_tot" id="input_tot" type="text" disabled>
+                        <input maxlength="3" pattern="[0-9]+" class="ep ep_tot" id="input_tot" type="text" disabled>
                         <div class="buttons-edit">
                             <button type="button" class="button button_episode" id="btn_tot_plus">+</button>
                             <button type="button" class="button button_episode" id="btn_tot_dash">-</button>

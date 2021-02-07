@@ -10,12 +10,27 @@ const $nome = document.querySelector('#nome');
 const $nome_id = document.querySelector('#nome_id');
 const $ep_atual = document.querySelector('.ep_atual');
 const $ep_tot = document.querySelector('.ep_tot');
+const $input_edit_image = document.querySelector('#input_edit_image');
 // Botões
 const $btn_atual_plus = document.querySelector('#btn_atual_plus');
 const $btn_atual_dash = document.querySelector('#btn_atual_dash');
 const $btn_tot_plus = document.querySelector('#btn_tot_plus');
 const $btn_tot_dash = document.querySelector('#btn_tot_dash');
 const $button_voltar_edit = document.querySelector('#button_voltar_edit');
+const $edit_image = document.querySelector('#edit_image');
+const $confirm_edit_image = document.querySelector('#confirm_edit_image');
+const $button_finish = document.querySelector('#button_finish');
+
+$input_edit_image.addEventListener('change', () => {
+    const $capa_load = $input_edit_image.files[0];
+    const $fileReader = new FileReader();
+    $fileReader.onloadend = () => {
+        $capa_editar.setAttribute('src', $fileReader.result)
+    }
+    $fileReader.readAsDataURL($capa_load);
+    $edit_image.setAttribute('style', 'display: none;')
+    $confirm_edit_image.removeAttribute('style');
+})
 
 const changePage = $page => {
     if ($page === $list) {
@@ -27,11 +42,89 @@ const changePage = $page => {
     }
 }
 
-$button_voltar_edit.addEventListener('click', () => {
-    changePage($edit);
+$confirm_edit_image.addEventListener('click', () => {
+    const $capa_load = $input_edit_image.files[0];
+    const $nome_id_value = document.querySelector('#nome_id').value
+    
+    const $formData = new FormData();
+    $formData.append('capa', $capa_load);
+    $formData.append('nome_id', $nome_id_value);
+
+    $options = {
+        method: 'POST',
+        mode: 'cors',
+        cache: 'default',
+        body: $formData
+    };
+
+    fetch(`${$urlServer}api/edit.php`, $options)
+        .then($response => {
+            if ($response.status === 200) {
+                document.location.reload(true);
+            }
+        })
+
 })
 
+$button_voltar_edit.addEventListener('click', () => {
+    changePage($edit);
+    $confirm_edit_image.setAttribute('style', 'display: none;')
+    $edit_image.removeAttribute('style');
+})
+
+const finish = ($id, $type) => {
+    const $formData = new FormData();
+    $formData.append('id', $id);
+    $formData.append('type', $type);
+
+    const $options = {
+        method: 'POST',
+        mode: 'cors',
+        cache: 'default',
+        body: $formData
+    }
+
+    fetch(`${$urlServer}api/finish.php`, $options);
+
+    setFinish($id, $type);
+}
+
+const setFinish = ($id, $type) => {
+    const $label = document.querySelector(`#label${$id}`);
+
+    if ($type === 'finish') {
+        const $btn_change = document.querySelector(`#btn_change${$id}`);
+        $button_finish.innerText = 'Recomeçar';
+        $button_finish.setAttribute('class', `status_edit status1`);
+        $button_finish.setAttribute('onclick', `finish(${$id}, 'restart')`);
+        $label.setAttribute('class', 'status3');
+        $label.innerText = 'Finalizado';
+        $btn_change.setAttribute('style', 'display: none;')
+    } else if ($type === 'restart') {
+        $button_finish.innerText = 'Finalizar';
+        $button_finish.setAttribute('class', `status_edit status3`);
+        $button_finish.setAttribute('onclick', `finish(${$id}, 'finish')`);
+        $label.setAttribute('class', 'status1');
+        $label.innerText = 'Assistindo';
+    }
+}
+
 const setData = $data => {
+    const $status = Number($data.status);
+    var $status_text = 'Finalizar';
+    var $status_class = 'status_edit status3';
+    var $status_function = 'finish';
+
+    if ($status === 3) {
+        var $status_text = 'Recomeçar';
+        var $status_class = 'status_edit status1'
+        var $status_function = 'restart';
+    }
+
+    $button_finish.innerText = $status_text;
+    $button_finish.setAttribute('class', `${$status_class}`)
+    $button_finish.setAttribute('onclick', `finish(${$data.id}, '${$status_function}')`)
+
     $titulo_confirm.innerText = `Deseja excluir ${$data.nome}?`;
     $button_trash.setAttribute('onclick', `del(${$data.id}, '${$data.nome_id}')`)
     $loading.setAttribute('style', 'display: none;')
@@ -102,12 +195,6 @@ $nome.addEventListener('input', () => {
     submitName($options, $id, $nome_value);
 })
 
-const episodeFinished = ($episode, $episode_other) => {
-    if ($episode === $episode_other) {
-        alert('Assis finalizado?');
-    }
-}
-
 const changeEpisode = ($type, $id, $operation) => {
     if ($type === 'atual') {
         var $input_episode = document.getElementById(`input_atual`);
@@ -125,7 +212,6 @@ const changeEpisode = ($type, $id, $operation) => {
         if ($operation === 'plus' && $episode < $episode_other) {
             $input_episode.setAttribute('value', $episode + 1);
             $episode++;
-            episodeFinished($episode, $episode_other);
         } else if ($operation === 'dash' && $episode > 0) {
             $input_episode.setAttribute('value', $episode - 1);
             $episode--;
@@ -135,7 +221,6 @@ const changeEpisode = ($type, $id, $operation) => {
         if ($operation === 'plus') {
             $input_episode.setAttribute('value', $episode + 1);
             $episode++;
-            episodeFinished($episode, $episode_other);
         } else if ($operation === 'dash' && $episode > 0 && $episode > $episode_other) {
             $input_episode.setAttribute('value', $episode - 1);
             $episode--;

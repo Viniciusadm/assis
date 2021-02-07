@@ -1,6 +1,8 @@
 <?php
-require_once realpath(dirname(__FILE__) . "/../config/connection.php");
 header("Access-Control-Allow-Origin: *");
+require_once realpath(dirname(__FILE__) . "/../config/connection.php");
+require_once "../vendor/autoload.php";
+use Gregwar\Image\Image;
 
 $pasta_imagem = realpath(dirname(__DIR__) . "/images/");
 
@@ -30,4 +32,15 @@ if (isset($_POST['episode'])) {
 
     $sql = "UPDATE assis SET ep_$type = $episode WHERE id = $id;";
     $connection->query($sql);
+}
+
+if (isset($_FILES['capa'])) {
+    $nome_id = $_POST['nome_id'];
+    $pastaUpload = dirname(__DIR__) . "/images/";
+    $tmp = $_FILES['capa']['tmp_name'];
+    $tipo = exif_imagetype($tmp);
+
+    if ($tipo === 2 || $tipo === 3) {
+        Image::open($tmp) -> resize(361, 512) -> save($pastaUpload . $nome_id . '.jpg');
+    }
 }

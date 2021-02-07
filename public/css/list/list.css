@@ -31,17 +31,6 @@ main {
     font-weight: bold;
 }
 
-.status1 {
-    color: #0c810c;
-}
-
-.status2 {
-    color: rgb(3, 3, 184);
-}
-
-.status3 {
-    color: red;
-}
 .capa-list {
     margin-right: 0.5rem;
     width: 5rem;
