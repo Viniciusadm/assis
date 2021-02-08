@@ -30,10 +30,17 @@
     </div>
 
     <div id="list" style="display: none;">
-        <div class="search">
+        <div class="nav">
             <span class="span-button_voltar">
                 <a href="../index.html"><img class="button_voltar" src="../images/arrow-left-white.svg" alt="voltar"></a>
             </span>
+            <div id="div_user">
+                <img id="icon_user_nav" src="../images/person-white.svg" alt="icon_user">
+                <p class="user"></p>
+            </div>
+            <button class="button_exit">Sair</button>
+        </div>
+        <div class="search">
             <span class="barra">
                 <input id="input-search" type="text" placeholder="Pesquisar">
             </span>
@@ -41,46 +48,57 @@
         <main></main>
     </div>
 
-    <div id="edit" style="display: none;">
-        <div id="edit_all">
-            <img class="button_voltar" id="button_voltar_edit" src="../images/arrow-left-white.svg" alt="voltar">
-            <div id="body_edit">
-                <div id="title_icon">
-                    <h1 id="title_edit"></h1>
-                    <img id="trash" src="../images/trash.svg" alt="trash">
+    <div id="edit_all_nav" style="display: none;">
+        <div id="edit">
+            <div class="nav">
+                <span class="span-button_voltar">
+                    <img class="button_voltar" id="button_voltar_edit" src="../images/arrow-left-white.svg" alt="voltar">
+                </span>
+                <div id="div_user">
+                    <img id="icon_user_nav" src="../images/person-white.svg" alt="icon_user">
+                    <p class="user"></p>
                 </div>
-                <div id="head_editar">
-                    <div id="div_capa">
-                        <img id="capa_editar" src="" alt="capa">
-                        <label for="input_edit_image">
-                            <div id="edit_image">
-                                <img id="pencil_edit" src="../images/pencil-fill.svg" alt="editar imagem">
-                            </div>
-                            <button id="confirm_edit_image" style="display: none;">Confirmar</button>
-                        </label>
-                        <input id="input_edit_image" type="file">
+                <button class="button_exit">Sair</button>
+            </div>
+            <div id="edit_all">
+                <div id="body_edit">
+                    <div id="title_icon">
+                        <h1 id="title_edit"></h1>
+                        <img id="trash" src="../images/trash.svg" alt="trash">
                     </div>
-                    <div id="nomes">
-                        <label for="nome">Nome</label>
-                        <input maxlength="25" id="nome" type="text">
-                        <label for="nome_id">Nome ID</label>
-                        <input id="nome_id" type="text" disabled>
-                        <p id="button_finish"></p>
-                    </div>
-                </div>
-                <div id="group_episodes">
-                    <div class="group_episode">
-                        <input maxlength="3" pattern="[0-9]+" class="ep ep_atual" id="input_atual" type="text" disabled>
-                        <div class="buttons-edit">
-                            <button type="button" class="button button_episode" id="btn_atual_plus">+</button>
-                            <button type="button" class="button button_episode" id="btn_atual_dash">-</button>
+                    <div id="head_editar">
+                        <div id="div_capa">
+                            <img id="capa_editar" src="" alt="capa">
+                            <label for="input_edit_image">
+                                <div id="edit_image">
+                                    <img id="pencil_edit" src="../images/pencil-fill.svg" alt="editar imagem">
+                                </div>
+                                <button id="confirm_edit_image" style="display: none;">Confirmar</button>
+                            </label>
+                            <input id="input_edit_image" type="file">
+                        </div>
+                        <div id="nomes">
+                            <label for="nome">Nome</label>
+                            <input maxlength="25" id="nome" type="text">
+                            <label for="nome_id">Nome ID</label>
+                            <input id="nome_id" type="text" disabled>
+                            <p id="button_finish"></p>
                         </div>
                     </div>
-                    <div class="group_episode">
-                        <input maxlength="3" pattern="[0-9]+" class="ep ep_tot" id="input_tot" type="text" disabled>
-                        <div class="buttons-edit">
-                            <button type="button" class="button button_episode" id="btn_tot_plus">+</button>
-                            <button type="button" class="button button_episode" id="btn_tot_dash">-</button>
+                    <div id="group_episodes">
+                        <div class="group_episode">
+                            <input maxlength="3" pattern="[0-9]+" class="ep ep_atual" id="input_atual" type="text" disabled>
+                            <div class="buttons-edit">
+                                <button type="button" class="button button_episode" id="btn_atual_plus">+</button>
+                                <button type="button" class="button button_episode" id="btn_atual_dash">-</button>
+                            </div>
+                        </div>
+                        <div class="group_episode">
+                            <input maxlength="3" pattern="[0-9]+" class="ep ep_tot" id="input_tot" type="text" disabled>
+                            <div class="buttons-edit">
+                                <button type="button" class="button button_episode" id="btn_tot_plus">+</button>
+                                <button type="button" class="button button_episode" id="btn_tot_dash">-</button>
+                            </div>
                         </div>
                     </div>
                 </div>

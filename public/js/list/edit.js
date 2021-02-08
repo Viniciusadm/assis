@@ -4,7 +4,7 @@ const $titulo_confirm = document.querySelector('#titulo_confirm');
 const $capa_editar = document.querySelector('#capa_editar');
 // Divs
 const $list = document.querySelector('#list');
-const $edit = document.querySelector('#edit');
+const $edit = document.querySelector('#edit_all_nav');
 // Inputs
 const $nome = document.querySelector('#nome');
 const $nome_id = document.querySelector('#nome_id');

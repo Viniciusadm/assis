@@ -5,6 +5,12 @@
     height: 80vh;
 }
 
+#edit_all_nav {
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+}
+
 #body_edit {
     margin-left: 0.2rem;
 }
