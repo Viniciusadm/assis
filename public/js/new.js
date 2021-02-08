@@ -1,7 +1,3 @@
-// const $urlServer = 'http://viniciusadm.000webhostapp.com/assis/';
-// const $url = 'http://assis.surge.sh/';
-const $url = 'http://localhost:8000/'
-const $urlServer = 'http://localhost:8001/';
 const $nome = document.querySelector('#nome');
 const $nome_id = document.querySelector('#nome_id');
 const $ep_atual = document.querySelector('#ep_atual');
@@ -19,18 +15,18 @@ $nome.addEventListener('input', () => {
 })
 
 $buttonAdd.addEventListener('click', () => {
-    const $formData = new FormData();
-    $formData.append('nome', $nome.value);
-    $formData.append('nome_id', $nome_id.value);
-    $formData.append('ep_atual', $ep_atual.value);
-    $formData.append('ep_tot', $ep_tot.value);
-    $formData.append('capa', $file.files[0]);
+    const $form_data = new FormData();
+    $form_data.append('nome', $nome.value);
+    $form_data.append('nome_id', $nome_id.value);
+    $form_data.append('ep_atual', $ep_atual.value);
+    $form_data.append('ep_tot', $ep_tot.value);
+    $form_data.append('capa', $file.files[0]);
 
     const $options = {
         method: 'POST',
         mode: 'cors',
         cache: 'default',
-        body: $formData
+        body: $form_data
     };
 
     fetch(`${$urlServer}api/new.php`, $options)

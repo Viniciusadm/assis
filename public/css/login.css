@@ -1,0 +1,47 @@
+#background {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 85vh;
+}
+
+#login_div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(255, 255, 255);
+    height: 20rem;
+    width: 18rem;
+    border-radius: 2rem;
+}
+
+#login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#title_login {
+    margin-bottom: 2.5rem;
+    font-size: 1.4rem;
+}
+
+#div_input_user {
+    border-bottom: 1px solid black;
+    margin-bottom: 1.4rem;
+
+}
+
+#input_user {
+    border: none;
+    font-size: 1.2rem;
+    width: 12rem;
+}
+
+#input_user:focus {
+    outline: none;
+}
+
+#button_confirm {
+    padding: 0.2rem;
+}

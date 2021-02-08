@@ -1,8 +1,4 @@
-// const $url = 'http://assis.surge.sh/';
-// const $urlServer = 'http://viniciusadm.000webhostapp.com/assis/';
-const $url = 'http://localhost:8000/';
-const $urlServer = 'http://localhost:8001/';
-let $body = document.querySelector('main');
+const $body = document.querySelector('main');
 const $loading = document.querySelector('#img_loading');
 
 const deactivate = ($id, $type) => {
@@ -21,15 +17,15 @@ const deactivate = ($id, $type) => {
         $label_status.innerHTML = `<span id="label${$id}" class="status2">Desativado</span>`
     }
 
-    const $formData = new FormData;
-    $formData.append('id', $id);
-    $formData.append('type', $type);
+    const $form_data = new FormData;
+    $form_data.append('id', $id);
+    $form_data.append('type', $type);
 
     const $options = {
         method: 'POST',
         mode: 'cors',
         cache: 'default',
-        body: $formData
+        body: $form_data
     }
 
     fetch(`${$urlServer}api/deactivate.php`, $options);

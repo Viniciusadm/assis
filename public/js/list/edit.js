@@ -29,16 +29,16 @@ $nome.addEventListener('input', () => {
     const $nome_value = $nome.value;
     const $img_capa = document.querySelector(`#img_capa${$id}`);
     $img_capa.setAttribute('onclick', `edit('${$nome_id.value}')`);
-    $formData = new FormData();
-    $formData.append('nome', $nome_value);
-    $formData.append('nome_id', $nome_id.value);
-    $formData.append('id', $id)
+    $form_data = new FormData();
+    $form_data.append('nome', $nome_value);
+    $form_data.append('nome_id', $nome_id.value);
+    $form_data.append('id', $id)
 
     const $options = {
         method: 'POST',
         mode: 'cors',
         cache: 'default',
-        body: $formData
+        body: $form_data
     }
     submitName($options, $id, $nome_value);
 })
@@ -58,15 +58,15 @@ $confirm_edit_image.addEventListener('click', () => {
     const $capa_load = $input_edit_image.files[0];
     const $nome_id_value = document.querySelector('#nome_id').value
     
-    const $formData = new FormData();
-    $formData.append('capa', $capa_load);
-    $formData.append('nome_id', $nome_id_value);
+    const $form_data = new FormData();
+    $form_data.append('capa', $capa_load);
+    $form_data.append('nome_id', $nome_id_value);
 
     $options = {
         method: 'POST',
         mode: 'cors',
         cache: 'default',
-        body: $formData
+        body: $form_data
     };
 
     fetch(`${$urlServer}api/edit.php`, $options)
@@ -135,16 +135,16 @@ const changeEpisode = ($type, $id, $operation) => {
 }
 
 const submitEpisode = ($id, $episode, $type) => {
-    const $formData = new FormData();
-    $formData.append('id', $id);
-    $formData.append('episode', $episode);
-    $formData.append('type', $type);
+    const $form_data = new FormData();
+    $form_data.append('id', $id);
+    $form_data.append('episode', $episode);
+    $form_data.append('type', $type);
 
     const $options = {
         method: 'POST',
         mode: 'cors',
         cache: 'default',
-        body: $formData
+        body: $form_data
     };
 
     fetch(`${$urlServer}api/edit.php`, $options);
@@ -182,15 +182,15 @@ const finish = ($id, $type_finish) => {
     if ($type_finish === 'finish') {
         $titulo_confirm.innerText = `Certeza que deseja finalizar?`;
         floating_screen(() => {
-            const $formData = new FormData();
-            $formData.append('id', $id);
-            $formData.append('type_finish', $type_finish);
+            const $form_data = new FormData();
+            $form_data.append('id', $id);
+            $form_data.append('type_finish', $type_finish);
         
             const $options = {
                 method: 'POST',
                 mode: 'cors',
                 cache: 'default',
-                body: $formData
+                body: $form_data
             }
         
             fetch(`${$urlServer}api/finish.php`, $options);
@@ -200,15 +200,15 @@ const finish = ($id, $type_finish) => {
     } else if ($type_finish === 'restart') {
         $titulo_confirm.innerText = `Deseja recomeçar?`;
         floating_screen(() => {
-            const $formData = new FormData();
-            $formData.append('id', $id);
-            $formData.append('type_finish', $type_finish);
+            const $form_data = new FormData();
+            $form_data.append('id', $id);
+            $form_data.append('type_finish', $type_finish);
         
             const $options = {
                 method: 'POST',
                 mode: 'cors',
                 cache: 'default',
-                body: $formData
+                body: $form_data
             }
         
             fetch(`${$urlServer}api/finish.php`, $options);

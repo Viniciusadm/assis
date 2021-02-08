@@ -1,7 +1,3 @@
-// const $urlServer = 'http://viniciusadm.000webhostapp.com/assis/';
-// const $url = 'http://assis.surge.sh/';
-const $url = 'http://localhost:8000/'
-const $urlServer = 'http://localhost:8001/';
 const $card = document.querySelector('#container_card');
 const $sortCard = document.querySelector('#container_sort_card');
 const $capa = document.querySelector('#capa');
@@ -14,6 +10,7 @@ const $btnConfirm = document.querySelector('#confirm');
 const $btnChangePage = document.querySelector('#button_sort_card');
 const $loading = document.querySelector('#img_loading');
 const $return = document.querySelector('.button_return');
+
 
 const pegarAssis = ($btn) => {
     $btn.setAttribute('style' , 'display: none;');
