@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,9 +10,12 @@
 </head>
 
 <body>
-    <div class="nav">
+    <div id="nav_index" class="nav">
+        <span id="span_button_voltar" style="display: none;">
+            <img id="button_voltar_index" class="button_voltar" src="images/arrow-left-white.svg" alt="voltar">
+        </span>
         <div id="div_user">
-            <img id="icon_user_nav" src="images/person-white.svg" alt="icon_user">
+            <img id="icon_user_nav" src="../images/person-white.svg" alt="icon_user">
             <p class="user"></p>
         </div>
         <button class="button_exit">Sair</button>
@@ -22,42 +24,43 @@
         <img src="images/loading.svg" alt="loading">
     </div>
 
+    <div id="div_error_assis" style="display: none;">
+        <h1>Parece que não tem nada cadastrado, <a href="pages/new.html">clique aqui</a> pra adicionar</h1>
+    </div>
+
     <div class="container" id="container_sort_card">
         <h1 id="principal-title">O que assistir?</h1>
         <div id="sort-card-buttons">
             <button id="button_sort_card" class="button button_sort_card"><img src="images/tv.svg" alt="sort"> Sortear</button>
-            <a href="pages/new.html"><button class="button button_sort_card"><img src="images/new.svg" alt="new">Novo</button></a>
             <a href="pages/list.html"><button class="button button_sort_card"><img src="images/list.svg" alt="list"> Lista</button></a>
+            <a href="pages/new.html"><button class="button button_sort_card"><img src="images/new.svg" alt="new">Novo</button></a>
         </div>
     </div>
 
     <div class="container" id="container_card" style="display: none;">
         <div id="card">
-            
-            <button class="button_return">
-                <img id="button_voltar_index" src="images/arrow-left-white.svg" alt="voltar">
-            </button>
-            
-            <div>
-                <h1><img alt="Capa" id="capa"></h1>
-            </div>
-
-            <div class="info">
-                <h2 id="titulo"></h2>
-                <p id="ep_atual"></p>
-                <p id="ep_tot"></p>
-                
-                <div id="buttons">
-                    <input class="button" id="nome_id" type="text" style="display: none">
-                    <input class="button" id="sort" type="button" value="Outro">
-                    <input class="button" id="confirm" type="button" value="Confirmar">
+            <div id="card_all">
+                <div id="title_card">
+                    <h2 id="titulo"></h2>
+                </div>
+                <div id="info_all">
+                    <div id="capa_card">
+                        <img alt="Capa" id="capa">
+                    </div>
+                    <div class="info">
+                        <p id="ep_atual"></p>
+                        <p id="ep_tot"></p>
+                        
+                        <div id="buttons_card">
+                            <input class="button" id="nome_id" type="text" style="display: none">
+                            <input class="button" id="confirm" type="button" value="Confirmar">
+                            <input class="button" id="sort" type="button" value="Outro">
+                        </div>
+                    </div>
                 </div>
             </div>
-    
-        
         </div>
     </div>
-
     <script src="../js/script.js"></script>
     <script src="js/index.js"></script>
 </body>

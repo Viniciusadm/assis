@@ -17,12 +17,17 @@
 
 #sort, #confirm {
     font-size: 0.8rem;
-    width: 6rem;
-    height: 3rem;
+    width: 6.2rem;
+    height: 3.2rem;
 }
 
 #button_voltar_index {
     cursor: pointer;
+}
+
+#buttons_card {
+    display: flex;
+    flex-direction: column;
 }
 
 .button_return {
@@ -42,6 +47,10 @@
     margin-bottom: 0.5rem;
 }
 
+#info_all {
+    display: flex;
+    flex-direction: row;
+}
 
 @media (min-width: 400px) {
     #capa {
@@ -53,7 +62,7 @@
     }
 
     #sort, #confirm {
-        width: 7.2rem;
+        width: 7.4rem;
     }
 
     .button_return > img {

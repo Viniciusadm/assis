@@ -28,7 +28,7 @@ $nome.addEventListener('input', () => {
     const $id = $nome_id.getAttribute('key');
     const $nome_value = $nome.value;
     const $img_capa = document.querySelector(`#img_capa${$id}`);
-    $img_capa.setAttribute('onclick', `edit('${$nome_id.value}')`);
+    $img_capa.setAttribute('onclick', `edit('${$id}')`);
     $form_data = new FormData();
     $form_data.append('nome', $nome_value);
     $form_data.append('nome_id', $nome_id.value);
@@ -61,6 +61,7 @@ $confirm_edit_image.addEventListener('click', () => {
     const $form_data = new FormData();
     $form_data.append('capa', $capa_load);
     $form_data.append('nome_id', $nome_id_value);
+    $form_data.append('id_user', $id_user);
 
     $options = {
         method: 'POST',
@@ -266,20 +267,24 @@ const finish_restart = ($id, $label) => {
     });
 }
 
-const edit = $nome_id => {
+const edit = $id => {
     changePage($list);
+    const $form_data = new FormData();
+    $form_data.append('id', $id);
+
     const $options = {
-        method: 'GET',
+        method: 'POST',
         mode: 'cors',
-        cache: 'default'
+        cache: 'default',
+        body: $form_data
     }
-    getData($nome_id, $options);
+    getData($options);
 }
 
 // Funções Montar Página
 
-const getData = ($nome_id, $options) => {
-    fetch(`${$urlServer}api/assis.php?assis=${$nome_id}`, $options)
+const getData = ($options) => {
+    fetch(`${$urlServer}api/assis.php`, $options)
         .then($response => {
             $response.json()
                 .then($itens => {
@@ -294,14 +299,16 @@ const setData = $data => {
     var $status_class = 'status_edit status3';
     var $status_function = 'finish';
 
+    let $buttons = document.querySelectorAll('.button_episode');
+    $buttons.forEach($button => {
+        $button.removeAttribute('disabled');
+    });
+
     if ($status === 3) {
         var $status_text = 'Recomeçar';
         var $status_class = 'status_edit status1'
         var $status_function = 'restart';
-    }
-
-    if ($status === 3) {
-        const $buttons = document.querySelectorAll('.button_episode');
+        let $buttons = document.querySelectorAll('.button_episode');
         $buttons.forEach($button => {
             $button.setAttribute('disabled', '');
         });
@@ -310,11 +317,10 @@ const setData = $data => {
     $button_finish.innerText = $status_text;
     $button_finish.setAttribute('class', `${$status_class}`)
     $button_finish.setAttribute('onclick', `finish(${$data.id}, '${$status_function}')`)
-
     $button_trash.setAttribute('onclick', `del(${$data.id}, '${$data.nome_id}', '${$data.nome}')`)
     $loading.setAttribute('style', 'display: none;')
     $title_edit.innerHTML = `${$data.nome}`;
-    $capa_editar.setAttribute('src', `${$urlServer}images/${$data.nome_id}.jpg`)
+    $capa_editar.setAttribute('src', `${$urlServer}images/${$user_actual}/${$data.nome_id}.jpg`)
     $nome.value = $data.nome;
     $nome_id.value = $data.nome_id;
     $nome_id.setAttribute('key', $data.id);

@@ -61,8 +61,16 @@ body {
 .nav {
     display: flex;
     flex-direction: row;
+    align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid white;
+    width: 100vw;
+    height: 2.5rem;
+}
+
+.button_voltar {
+    width: 2.5rem;
+    height: 2.5rem;
 }
 
 .user {

@@ -1,14 +1,13 @@
 #edit {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 80vh;
 }
 
-#edit_all_nav {
-    display: flex;
-    flex-direction: column;
-    height: 80vh;
+#nav_edit {
+    justify-self: flex-start;
 }
 
 #body_edit {

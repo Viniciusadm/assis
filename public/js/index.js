@@ -9,40 +9,52 @@ const $btnSort = document.querySelector('#sort');
 const $btnConfirm = document.querySelector('#confirm');
 const $btnChangePage = document.querySelector('#button_sort_card');
 const $loading = document.querySelector('#img_loading');
-const $return = document.querySelector('.button_return');
-
+const $return = document.querySelector('#span_button_voltar');
+const $nav_index = document.querySelector('#nav_index');
+const $div_error_assis = document.querySelector('#div_error_assis');
 
 const pegarAssis = ($btn) => {
     $btn.setAttribute('style' , 'display: none;');
     $loading.removeAttribute('style');
     
+    const $form_data = new FormData();
+    $form_data.append('id_user', $id_user);
+
     const $options = {
-        method: 'GET',
+        method: 'POST',
         mode: 'cors',
-        cache: 'default'
+        cache: 'default',
+        body: $form_data
     };
 
     fetch(`${$urlServer}api/random.php`, $options)
-        .then($response => {
-            $response.json()
-                .then($itens => {
-                    $capa.setAttribute('src', `${$urlServer}images/${$itens['nome_id']}.jpg`);
-                    $titulo.innerHTML = $itens['nome'];
-                    $ep_atual.innerHTML = `Próximo Episódio: <span class="episodeDestaque">${Number($itens['ep_atual']) + 1}</span>`;
-                    $ep_tot.innerHTML = `Total: <span class="episodeDestaque">${$itens['ep_tot']}</span>`;
-                    $nome_id.value = $itens['nome_id'];
-                    $card.removeAttribute('style');
-                    $loading.setAttribute('style' , 'display: none;');
-                });
-            });
+        .then($response => { $response.json()
+        .then($itens => {
+            if ($itens !== 'not_assis') {
+                $capa.setAttribute('src', `${$urlServer}images/${$user_actual}/${$itens['nome_id']}.jpg`);
+                $titulo.innerHTML = $itens['nome'];
+                $ep_atual.innerHTML = `Próximo Episódio: <span class="episodeDestaque">${Number($itens['ep_atual']) + 1}</span>`;
+                $ep_tot.innerHTML = `Total: <span class="episodeDestaque">${$itens['ep_tot']}</span>`;
+                $nome_id.value = $itens['nome_id'];
+                $card.removeAttribute('style');
+                $loading.setAttribute('style' , 'display: none;');
+            } else if ($itens === 'not_assis') {
+                $div_error_assis.removeAttribute('style');
+                $loading.setAttribute('style' , 'display: none;');
+            }
+        });
+    });
 };
 
 $return.addEventListener('click', () => {
     $card.setAttribute('style', 'display: none;');
+    $return.setAttribute('style', 'display: none;');
+    $div_error_assis.setAttribute('style' , 'display: none;');
     $sortCard.removeAttribute('style');
 })
 
 $btnChangePage.addEventListener('click', () => {
+    $return.removeAttribute('style');
     pegarAssis($sortCard);
 });
 
@@ -51,14 +63,15 @@ $btnSort.addEventListener('click', () => {
 });
 
 $btnConfirm.addEventListener('click', () => {
-    let formData = new FormData();
-    formData.append('assis', $nome_id.value);
+    const $form_data = new FormData();
+    $form_data.append('assis', $nome_id.value);
+    $form_data.append('id_user', $id_user)
 
     const $options = {
         method: 'POST',
         mode: 'cors',
         cache: 'default',
-        body: formData
+        body: $form_data
     };
     
     fetch(`${$urlServer}api/confirm.php`, $options)

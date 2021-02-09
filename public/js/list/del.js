@@ -19,8 +19,9 @@ const removeAssis = $id => {
 
 const delDataBase = ($id, $nome_id) => {
     const $form_data = new FormData();
-    $form_data.append('id', $id)
-    $form_data.append('nome_id', $nome_id)
+    $form_data.append('id', $id);
+    $form_data.append('nome_id', $nome_id);
+    $form_data.append('user_actual', $user_actual);
 
     const $options = {
         method: 'POST',
@@ -29,5 +30,5 @@ const delDataBase = ($id, $nome_id) => {
         body: $form_data
     }
 
-    fetch(`${$urlServer}api/del.php`, $options)
+    fetch(`${$urlServer}api/del.php`, $options);
 }

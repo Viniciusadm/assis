@@ -4,6 +4,8 @@ const $url = 'http://localhost:8000/';
 const $urlServer = 'http://localhost:8001/';
 const $users = document.querySelectorAll('.user');
 const $buttons_exit = document.querySelectorAll('.button_exit');
+const $user_actual = localStorage.getItem('user');
+const $id_user = localStorage.getItem('id');
 
 if (localStorage.getItem('name') === null) {
     window.location.href = `${$url}pages/login.html`;

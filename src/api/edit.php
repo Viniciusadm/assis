@@ -4,9 +4,10 @@ require_once realpath(dirname(__FILE__) . "/../config/connection.php");
 require_once "../vendor/autoload.php";
 use Gregwar\Image\Image;
 
-$pasta_imagem = realpath(dirname(__DIR__) . "/images/");
 
 if (isset($_POST['nome'])) {
+    $user_actual = $_POST['user_actual'];
+    $pasta_imagem = realpath(dirname(__DIR__) . "/images/$user_actual/");
     $id = $_POST['id'];
     $sql = "SELECT nome_id from assis where id = $id;";
     $nome = $_POST['nome'];
@@ -36,11 +37,12 @@ if (isset($_POST['episode'])) {
 
 if (isset($_FILES['capa'])) {
     $nome_id = $_POST['nome_id'];
-    $pastaUpload = dirname(__DIR__) . "/images/";
+    $user_actual = $_POST['user_actual'];
+    $pasta_upload = dirname(__DIR__) . "/images/$user_actual/";
     $tmp = $_FILES['capa']['tmp_name'];
     $tipo = exif_imagetype($tmp);
 
     if ($tipo === 2 || $tipo === 3) {
-        Image::open($tmp) -> resize(361, 512) -> save($pastaUpload . $nome_id . '.jpg');
+        Image::open($tmp) -> resize(361, 512) -> save($pasta_upload . $nome_id . '.jpg');
     }
 }

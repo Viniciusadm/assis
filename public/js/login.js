@@ -8,13 +8,34 @@ if (localStorage.getItem('name') !== null) {
     window.location.href = $url;
 }
 
-const validation = $name => {
-    if ($name === 'not_user') {
+const validation = $user => {
+    if ($user === 'not_user') {
         alert('Usuário não encontrado');
-    } else if ($name !== 'not_user') {
-        localStorage.setItem('name', $name);
+    } else if ($user !== 'not_user') {
+        localStorage.setItem('name', $user['name']);
+        localStorage.setItem('user', $user['user']);
+        getId($user['user']);
         window.location.href = $url;
     }
+}
+
+const getId = $user => {
+    const $form_data = new FormData();
+    $form_data.append('user', $user);
+
+    const $options = {
+        method: 'POST',
+        mode: 'cors',
+        cache: 'default',
+        body: $form_data
+    };
+
+    fetch(`${$urlServer}api/id.php`, $options)
+        .then($response => { $response.json()
+        .then($id => {
+            localStorage.setItem('id', $id['id']);
+        })
+    })
 }
 
 $button_confirm.addEventListener('click', () => {
@@ -33,8 +54,8 @@ $button_confirm.addEventListener('click', () => {
     fetch(`${$urlServer}api/login.php`, $options)
         .then($response => {
             $response.json()
-                .then($name => {
-                    validation($name);
+                .then($user => {
+                    validation($user);
                 })
         })
 })

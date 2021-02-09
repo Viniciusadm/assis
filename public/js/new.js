@@ -21,6 +21,8 @@ $buttonAdd.addEventListener('click', () => {
     $form_data.append('ep_atual', $ep_atual.value);
     $form_data.append('ep_tot', $ep_tot.value);
     $form_data.append('capa', $file.files[0]);
+    $form_data.append('id_user', $id_user);
+    $form_data.append('user_actual', $user_actual);
 
     const $options = {
         method: 'POST',

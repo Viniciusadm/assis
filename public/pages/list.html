@@ -11,6 +11,10 @@
     <link rel="stylesheet" href="../css/list/del.css">
 </head>
 <body>
+    <div id="div_error_assis" style="display: none;">
+        <h1>Parece que não tem nada cadastrado, <a href="new.html">clique aqui</a> pra adicionar</h1>
+    </div>
+
     <div id="confirm_body" style="display: none;">
         <div id="div_confirm">
             <div id="confirm">
@@ -28,10 +32,9 @@
     <div id="img_loading">
         <img src="../images/loading.svg" alt="loading">
     </div>
-
     <div id="list" style="display: none;">
         <div class="nav">
-            <span class="span-button_voltar">
+            <span class="span_button_voltar">
                 <a href="../index.html"><img class="button_voltar" src="../images/arrow-left-white.svg" alt="voltar"></a>
             </span>
             <div id="div_user">
@@ -49,17 +52,17 @@
     </div>
 
     <div id="edit_all_nav" style="display: none;">
-        <div id="edit">
-            <div class="nav">
-                <span class="span-button_voltar">
-                    <img class="button_voltar" id="button_voltar_edit" src="../images/arrow-left-white.svg" alt="voltar">
-                </span>
-                <div id="div_user">
-                    <img id="icon_user_nav" src="../images/person-white.svg" alt="icon_user">
-                    <p class="user"></p>
-                </div>
-                <button class="button_exit">Sair</button>
+        <div class="nav nav_edit">
+            <span class="span_button_voltar">
+                <img class="button_voltar" id="button_voltar_edit" src="../images/arrow-left-white.svg" alt="voltar">
+            </span>
+            <div id="div_user">
+                <img id="icon_user_nav" src="../images/person-white.svg" alt="icon_user">
+                <p class="user"></p>
             </div>
+            <button class="button_exit">Sair</button>
+        </div>
+        <div id="edit">
             <div id="edit_all">
                 <div id="body_edit">
                     <div id="title_icon">
@@ -103,7 +106,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>    
     </div>
     <script src="../js/script.js"></script>
     <script src="../js/list/del.js"></script>

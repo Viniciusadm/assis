@@ -66,12 +66,7 @@ main {
     border: none;
 }
 
-.button_voltar {
-    width: 2.5rem;
-    height: 2.5rem;
-}
-
-.span-button_voltar {
+.span_button_voltar {
     display: flex;
     justify-content: center;
     height: 2.5rem;
