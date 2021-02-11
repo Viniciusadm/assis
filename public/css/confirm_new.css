@@ -1,0 +1,25 @@
+#container_confirm {
+    display: flex;
+    height: 80vh;
+    width: 100vw;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#title_confirm {
+    margin-bottom: 0.8rem;
+    color: #ffffff;
+    font-size: 1.6rem;
+}
+
+#link_home > a {
+    text-decoration: none;
+    color: rgb(228, 225, 225);
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+#link_home > a:hover {
+    color: #dddddd;
+}

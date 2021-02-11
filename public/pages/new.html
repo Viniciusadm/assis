@@ -5,32 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Novo</title>
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/new.css">
 </head>
 <body>
-    <div class="nav">
-        <div id="div_user">
-            <img id="icon_user_nav" src="../images/person-white.svg" alt="icon_user">
-            <p class="user"></p>
-        </div>
-        <button class="button_exit">Sair</button>
+    <div id="img_loading" style="display: none;">
+        <img src="../images/loading.svg" alt="loading">
     </div>
-    <form enctype="multipart/form-data">
-        <label for="nome">Nome</label>
-        <input maxlength="25" type="text" id="nome" required>
-        <br/>
-        <input type="text" id="nome_id" required readonly style="display: none;">
-        <label for="image">Imagem</label>
-        <input type="file" id="image">
-        <br/>
-        <label for="ep_atual">Episódio Atual</label>
-        <input type="text" value="0" maxlength="3" id="ep_atual" pattern="[0-9]+" required>
-        <br/>
-        <label for="ep_tot">Episódios Totais</label>
-        <input type="text" id="ep_tot" maxlength="3" pattern="[0-9]+" required>
-        <br/>
-        <button type="button" id="add">Adicionar</button>
-    </form>
-
+    <div id="body">
+        <div class="nav">
+            <span class="span_button_voltar">
+                <a href="../index.html"><img class="button_voltar" src="../images/arrow-left-white.svg" alt="voltar"></a>
+            </span>
+            <div id="div_user">
+                <img id="icon_user_nav" src="../images/person-white.svg" alt="icon_user">
+                <p class="user"></p>
+            </div>
+            <button class="button_exit">Sair</button>
+        </div>
+        <form id="form_new" enctype="multipart/form-data">
+            <div class="part">
+                <label for="nome">Nome <span class="asterisk">*</span></label>
+                <input maxlength="25" type="text" id="nome">
+            </div>
+            <input type="text" id="nome_id" readonly style="display: none;">
+            <div class="part">
+                <label for="ep_atual">Episódio Atual <span class="asterisk">*</span></label>
+                <input type="text" value="0" maxlength="3" id="ep_atual" pattern="[0-9]+">
+            </div>
+            <div class="part">
+                <label for="ep_tot">Episódios Totais <span class="asterisk">*</span></label>
+                <input type="text" id="ep_tot" maxlength="3" pattern="[0-9]+">
+            </div>
+            <div class="part">
+                <label id="label_image" for="input_image"><p>Imagem</p><img src="../images/image.svg" id="image_upload" alt="Image Upload"></label>
+                <input type="file" id="input_image">
+            </div>
+            <div class="part">
+                <button class="button" type="button" id="add">Adicionar</button>
+            </div>
+            <div id="error">
+                <p class="asterisk" id="p_error"></p>
+            </div>
+        </form>
+    </div>
     <script src="../js/script.js"></script>
     <script src="../js/new.js"></script>
 </body>

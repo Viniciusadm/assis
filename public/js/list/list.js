@@ -46,7 +46,6 @@ const mountPage = () => {
     
     fetch(`${$urlServer}api/assis.php`, $options).then($response => {
             $response.json().then($itens => {
-                console.log($itens);
                 if ($itens !== 'not_assis') {
                     $conteudo = '';
                     for ($assis of $itens) {

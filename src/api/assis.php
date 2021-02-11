@@ -4,11 +4,9 @@ header("Access-Control-Allow-Origin: *");
 
 if (isset($_POST['id'])) {
     $id = $_POST['id'];
-    foreach ($assis as $assi) {
-        if ($assi['id'] === $id) {
-            $assis = $assi;   
-        }
-    }
+    $sql = "SELECT * FROM assis where id = $id";
+    $result = $connection->query($sql);
+    $assis = $result->fetch_assoc();
 }
 
 if (isset($_POST['id_user'])) {

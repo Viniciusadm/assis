@@ -232,7 +232,6 @@ const finish_finish = ($id, $label) => {
     const $type = 'atual';
     const $episode_label = document.querySelector(`#episode${$id}`);
     const $btn_change = document.querySelector(`#btn_change${$id}`);
-    console.log($btn_change);
     const $input_episode_atual = document.querySelector('#input_atual');
     const $episode_tot = Number(document.querySelector('#input_tot').value);
     const $buttons = document.querySelectorAll('.button_episode');

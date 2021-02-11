@@ -17,11 +17,12 @@ if (isset($_FILES) && isset($_FILES['capa'])) {
     $tipo = exif_imagetype($tmp);
 
     if ($tipo === 2 || $tipo === 3) {
-        Image::open($tmp) -> resize(361, 512) -> save($pastaUpload . $nome_id . '.jpg');
+        Image::open($tmp) -> resize(360, 512) -> save($pastaUpload . $nome_id . '.jpg');
     }
 } else {
     $pastaUpload = dirname(__DIR__) . "/images/$user_actual/";
-    copy($pastaUpload . "other.jpg", $pastaUpload . $nome_id . ".jpg");
+    $pastaImagem = dirname(__DIR__) . "/images/other.jpg";
+    copy($pastaImagem, $pastaUpload . $nome_id . ".jpg");
 }
 
 $sql = "INSERT INTO assis (nome, nome_id, ep_atual, ep_tot, id_user) values ('$nome', '$nome_id', $ep_atual, $ep_tot, $id_user);";

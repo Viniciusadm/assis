@@ -88,10 +88,6 @@ main {
     outline: none;
 }
 
-#img_loading {
-    width: 100vw;
-    height: 90vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.barra {
+    margin-left: 0.3rem;
 }
