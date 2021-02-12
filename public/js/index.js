@@ -77,7 +77,7 @@ $btnConfirm.addEventListener('click', () => {
     fetch(`${$urlServer}api/confirm.php`, $options)
         .then($response => {
             if($response.status == 200){
-                window.location.href = `${$url}pages/confirm.html`;
+                window.location.href = `${$url}pages/confirm_assis.html`;
             } else {
                 throw response.status;
             }

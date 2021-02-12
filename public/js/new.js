@@ -32,34 +32,56 @@ $nome.addEventListener('input', () => {
 })
 
 $buttonAdd.addEventListener('click', () => {
-    if (checkValues() === true) {
-        $body.setAttribute('style', 'display: none;')
-        $img_loading.removeAttribute('style');
-        const $form_data = new FormData();
-        $form_data.append('nome', $nome.value);
-        $form_data.append('nome_id', $nome_id.value);
-        $form_data.append('ep_atual', $ep_atual.value);
-        $form_data.append('ep_tot', $ep_tot.value);
-        $form_data.append('capa', $file.files[0]);
-        $form_data.append('id_user', $id_user);
-        $form_data.append('user_actual', $user_actual);
-    
-        const $options = {
-            method: 'POST',
-            mode: 'cors',
-            cache: 'default',
-            body: $form_data
-        };
-    
-        fetch(`${$urlServer}api/new.php`, $options)
-        .then($response => {
-            if($response.status == 200){
-                window.location.href = `${$url}pages/confirm_new.html`;
-            } else {
-                throw response.status;
-            }
-        });
-    } else if (checkValues() === false) {
-        $p_error.innerText = 'Preencha todos os campos obrigatórios';
+    const $form_data = new FormData();
+    $form_data.append('nome_id', $nome_id.value);
+    $form_data.append('id_user', $id_user);
+
+    const $options = {
+        method: 'POST',
+        mode: 'cors',
+        cache: 'default',
+        body: $form_data
     }
+
+    fetch(`${$urlServer}api/assis.php`, $options)
+    .then($response => { 
+        $response.json()
+            .then($item => {
+                console.log($item);
+                if ($item === 'not_exists') {
+                    if (checkValues() === true) {
+                        $body.setAttribute('style', 'display: none;')
+                        $img_loading.removeAttribute('style');
+                        const $form_data = new FormData();
+                        $form_data.append('nome', $nome.value);
+                        $form_data.append('nome_id', $nome_id.value);
+                        $form_data.append('ep_atual', $ep_atual.value);
+                        $form_data.append('ep_tot', $ep_tot.value);
+                        $form_data.append('capa', $file.files[0]);
+                        $form_data.append('id_user', $id_user);
+                        $form_data.append('user_actual', $user_actual);
+                    
+                        const $options = {
+                            method: 'POST',
+                            mode: 'cors',
+                            cache: 'default',
+                            body: $form_data
+                        };
+                    
+                        fetch(`${$urlServer}api/new.php`, $options)
+                        .then($response => {
+                            if($response.status == 200){
+                                window.location.href = `${$url}pages/confirm_new.html`;
+                            } else {
+                                throw response.status;
+                            }
+                        });
+                    } else if (checkValues() === false) {
+                        $p_error.innerText = 'Preencha todos os campos obrigatórios';
+                    }
+                } else {
+                    $p_error.innerText = 'Item já existente';
+                }
+        })
+    })
 });

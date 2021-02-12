@@ -104,3 +104,7 @@ body {
     padding: 0.2rem;
     padding-right: 0;
 }
+
+.asterisk {
+    color: red;
+}

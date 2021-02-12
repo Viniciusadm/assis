@@ -1,7 +1,7 @@
-// const $url = 'http://assis.surge.sh/';
-// const $urlServer = 'http://viniciusadm.000webhostapp.com/assis/';
-const $url = 'http://localhost:8000/';
-const $urlServer = 'http://localhost:8001/';
+const $url = 'http://assis.surge.sh/';
+const $urlServer = 'http://viniciusadm.000webhostapp.com/assis/';
+// const $url = 'http://localhost:8000/';
+// const $urlServer = 'http://localhost:8001/';
 const $users = document.querySelectorAll('.user');
 const $buttons_exit = document.querySelectorAll('.button_exit');
 const $user_actual = localStorage.getItem('user');
