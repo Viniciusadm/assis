@@ -34,24 +34,18 @@
     cursor: pointer;
 }
 
-#nome_id {
-    color: black;
-}
-
 #input_edit_image {
     display: none;
 }
 
 .ep {
     background-color: rgb(211, 208, 208);
-    color: black;
     border: 1px solid gray;
 }
 
 #title_edit {
     font-size: 1.2rem;
     margin-bottom: 0.4rem;
-    color: #06739e;
 }
 
 #head_editar {

@@ -41,7 +41,6 @@ main {
 
 .titulo {
     font-size: 1rem;
-    color: #06739e;
 }
 
 .div_icon_editar {
@@ -61,7 +60,6 @@ main {
 
 .episodio:disabled {
     font-size: 0.8rem;
-    color: rgb(255, 255, 255);
     background-color: transparent;
     border: none;
 }

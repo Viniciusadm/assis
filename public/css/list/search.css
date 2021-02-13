@@ -19,10 +19,6 @@
     border-radius: 0.1rem;
 }
 
-#input-search::placeholder {
-    color: black;
-}
-
 #input-search:focus {
     outline: none;
 }
