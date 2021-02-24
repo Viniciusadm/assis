@@ -28,3 +28,7 @@ if (isset($_FILES) && isset($_FILES['capa'])) {
 $sql = "INSERT INTO assis (nome, nome_id, ep_atual, ep_tot, id_user) values ('$nome', '$nome_id', $ep_atual, $ep_tot, $id_user);";
 
 $connection->query($sql);
+
+$ocorrencia = "$nome criado";
+
+newlog($id_user, $ocorrencia, 'assis');

@@ -42,8 +42,6 @@ const getId = $user => {
 $button_confirm.addEventListener('click', () => {
     const $input_user = document.querySelector('#input_user').value;
 
-    console.log($input_user);
-
     if ($input_user === '') {
         $p_error.innerText = 'Preencha o campo';
     } else if ($input_user !== undefined) {

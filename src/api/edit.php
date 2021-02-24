@@ -30,9 +30,13 @@ if (isset($_POST['episode'])) {
     $id = $_POST['id'];
     $type = $_POST['type'];
     $episode = $_POST['episode'];
+    $name = $_POST['name'];
 
     $sql = "UPDATE assis SET ep_$type = $episode WHERE id = $id;";
     $connection->query($sql);
+
+    $ocorrencia = "Episódio da coluna $type de $name recebeu $episode";
+    newlog($id_user, $ocorrencia, 'assis');
 }
 
 if (isset($_FILES['capa'])) {

@@ -100,7 +100,7 @@ const submitName = ($options, $id, $nome_value) => {
 
 // Funções Editar (episódios)
 
-const changeEpisode = ($type, $id, $operation) => {
+const changeEpisode = ($type, $id, $operation, $name) => {
     if ($type === 'atual') {
         var $input_episode = document.querySelector('#input_atual');
         var $episode_other = Number(document.querySelector('#input_tot').value);
@@ -132,14 +132,15 @@ const changeEpisode = ($type, $id, $operation) => {
         
         $input_presentation.value = `Episódios: ${$episode_other}/${$episode}`;
     }
-    submitEpisode($id, $episode, $type);
+    submitEpisode($id, $episode, $type, $name);
 }
 
-const submitEpisode = ($id, $episode, $type) => {
+const submitEpisode = ($id, $episode, $type, $name) => {
     const $form_data = new FormData();
     $form_data.append('id', $id);
     $form_data.append('episode', $episode);
     $form_data.append('type', $type);
+    $form_data.append('name', $name);
 
     const $options = {
         method: 'POST',

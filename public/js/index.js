@@ -12,6 +12,12 @@ const $loading = document.querySelector('#img_loading');
 const $return = document.querySelector('#span_button_voltar');
 const $nav_index = document.querySelector('#nav_index');
 const $div_error_assis = document.querySelector('#div_error_assis');
+const $sort_card_buttons = document.querySelector('#sort_card_buttons');
+
+if ($id_user === "1") {
+    const $button = `<a href="pages/link.html"><button class="button button_sort_card"><img src="images/link.svg" alt="link"> Link</button></a>`;
+    $sort_card_buttons.insertAdjacentHTML('beforeend', $button);
+}
 
 const pegarAssis = ($btn) => {
     $btn.setAttribute('style' , 'display: none;');

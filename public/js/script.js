@@ -7,6 +7,8 @@ const $buttons_exit = document.querySelectorAll('.button_exit');
 const $user_actual = localStorage.getItem('user');
 const $id_user = localStorage.getItem('id');
 
+alert(navigator.productSub);
+
 if (localStorage.getItem('name') === null) {
     window.location.href = `${$url}pages/login.html`;
 } else if (localStorage.getItem('name') !== null) {
@@ -18,6 +20,8 @@ if (localStorage.getItem('name') === null) {
 
 $buttons_exit.forEach($button_exit => {
     $button_exit.addEventListener('click', () => {
+        localStorage.removeItem('user');
+        localStorage.removeItem('id');
         localStorage.removeItem('name');
         window.location.href = `${$url}pages/login.html`;
     })
