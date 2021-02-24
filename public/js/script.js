@@ -7,7 +7,6 @@ const $buttons_exit = document.querySelectorAll('.button_exit');
 const $user_actual = localStorage.getItem('user');
 const $id_user = localStorage.getItem('id');
 
-alert(navigator.productSub);
 
 if (localStorage.getItem('name') === null) {
     window.location.href = `${$url}pages/login.html`;
