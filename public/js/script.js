@@ -7,11 +7,10 @@ const $buttons_exit = document.querySelectorAll('.button_exit');
 const $user_actual = localStorage.getItem('user');
 const $id_user = localStorage.getItem('id');
 
-
 if (localStorage.getItem('name') === null) {
     window.location.href = `${$url}pages/login.html`;
 } else if (localStorage.getItem('name') !== null) {
-    $name = localStorage.getItem('name');
+    const $name = localStorage.getItem('name');
     $users.forEach($user => {
         $user.innerHTML = `Usuário: ${$name}`;
     });

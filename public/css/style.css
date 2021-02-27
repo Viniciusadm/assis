@@ -74,7 +74,8 @@ body {
     border-bottom: 1px solid black;
     width: 100vw;
     height: 2.5rem;
-    /* position: fixed; */
+    position: sticky;
+    top: 0;
     background-color: white;
 }
 

@@ -57,10 +57,20 @@
             </div>
             <button class="button_exit">Sair</button>
         </div>
-        <div class="search">
-            <span class="barra">
-                <input id="input-search" type="text" placeholder="Pesquisar">
-            </span>
+        <div id="options">
+            <div class="search">
+                <span class="barra">
+                    <input id="input-search" type="text" placeholder="Pesquisar">
+                </span>
+            </div>
+            <div id="filter">
+                <input type="checkbox" class="checkbox_filter" id="watching_checkbox">
+                <label class="checkbox_filter_label" for="watching_checkbox">Assistindo</label>
+                <input type="checkbox" class="checkbox_filter" id="deactivate_checkbox">
+                <label class="checkbox_filter_label" for="deactivate_checkbox">Desativados</label>
+                <input type="checkbox" class="checkbox_filter" id="finished_checkbox">
+                <label class="checkbox_filter_label" for="finished_checkbox">Finalizados</label>
+            </div>
         </div>
         <main></main>
     </div>

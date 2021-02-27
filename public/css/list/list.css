@@ -89,3 +89,15 @@ main {
 .barra {
     margin-left: 0.3rem;
 }
+
+#options {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#filter {
+    display: flex;
+    flex-direction: row;
+}

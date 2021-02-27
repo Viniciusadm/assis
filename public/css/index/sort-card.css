@@ -10,14 +10,26 @@
     align-items: center;
 }
 
+#buttons_choice_div > button {
+    width: 37.5vw;
+}
+
 @media (min-width: 700px) {
     .button_sort_card {
         width: 50vw;
+    }
+
+    #buttons_choice_div > button {
+        width: 25vw;
     }
 }
 
 @media (min-width: 1000px) {
     .button_sort_card {
         width: 40vw;
+    }
+
+    #buttons_choice_div > button {
+        width: 20vw;
     }
 }

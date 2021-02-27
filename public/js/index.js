@@ -13,18 +13,25 @@ const $return = document.querySelector('#span_button_voltar');
 const $nav_index = document.querySelector('#nav_index');
 const $div_error_assis = document.querySelector('#div_error_assis');
 const $sort_card_buttons = document.querySelector('#sort_card_buttons');
+const $buttons_choice_div = document.querySelector('#buttons_choice_div');
+const $button_prop = document.querySelector('#button_prop');
+const $button_normal = document.querySelector('#button_normal');
 
 if ($id_user === "1") {
     const $button = `<a href="pages/link.html"><button class="button button_sort_card"><img src="images/link.svg" alt="link"> Link</button></a>`;
     $sort_card_buttons.insertAdjacentHTML('beforeend', $button);
 }
 
-const pegarAssis = ($btn) => {
-    $btn.setAttribute('style' , 'display: none;');
+const pegarAssis = ($prop) => {
+    $return.removeAttribute('style');
+    $sortCard.setAttribute('style' , 'display: none;');
     $loading.removeAttribute('style');
     
     const $form_data = new FormData();
+    console.log($id_user);
+    console.log($prop);
     $form_data.append('id_user', $id_user);
+    $form_data.append('prop', $prop);
 
     const $options = {
         method: 'POST',
@@ -46,13 +53,15 @@ const pegarAssis = ($btn) => {
                 $loading.setAttribute('style' , 'display: none;');
             } else if ($itens === 'not_assis') {
                 $div_error_assis.removeAttribute('style');
-                $loading.setAttribute('style' , 'display: none;');
+                $loading.setAttribute('style' , 'dis2play: none;');
             }
         });
     });
 };
 
 $return.addEventListener('click', () => {
+    $buttons_choice_div.setAttribute('style', 'display: none;');
+    $btnChangePage.removeAttribute('style');
     $card.setAttribute('style', 'display: none;');
     $return.setAttribute('style', 'display: none;');
     $div_error_assis.setAttribute('style' , 'display: none;');
@@ -60,8 +69,8 @@ $return.addEventListener('click', () => {
 })
 
 $btnChangePage.addEventListener('click', () => {
-    $return.removeAttribute('style');
-    pegarAssis($sortCard);
+    $buttons_choice_div.removeAttribute('style');
+    $btnChangePage.setAttribute('style', 'display: none;')
 });
 
 $btnSort.addEventListener('click', () => {
@@ -69,6 +78,7 @@ $btnSort.addEventListener('click', () => {
 });
 
 $btnConfirm.addEventListener('click', () => {
+    $btnConfirm.setAttribute('disabled', '');
     const $form_data = new FormData();
     $form_data.append('assis', $nome_id.value);
     $form_data.append('id_user', $id_user)
