@@ -132,15 +132,17 @@ const changeEpisode = ($type, $id, $operation, $name) => {
         
         $input_presentation.value = `Episódios: ${$episode_other}/${$episode}`;
     }
-    submitEpisode($id, $episode, $type, $name);
+    submitEpisode($id, $episode, $type, $name, $operation);
 }
 
-const submitEpisode = ($id, $episode, $type, $name) => {
+const submitEpisode = ($id, $episode, $type, $name, $operation) => {
     const $form_data = new FormData();
     $form_data.append('id', $id);
     $form_data.append('episode', $episode);
     $form_data.append('type', $type);
     $form_data.append('name', $name);
+    $form_data.append('operation', $operation);
+    $form_data.append('id_user', $id_user);
 
     const $options = {
         method: 'POST',
@@ -269,22 +271,18 @@ const finish_restart = ($id, $label) => {
 
 const edit = $id => {
     changePage($list);
-    const $form_data = new FormData();
-    $form_data.append('id', $id);
-
     const $options = {
-        method: 'POST',
+        method: 'GET',
         mode: 'cors',
-        cache: 'default',
-        body: $form_data
+        cache: 'default'
     }
-    getData($options);
+    getData($options, $id);
 }
 
 // Funções Montar Página
 
-const getData = ($options) => {
-    fetch(`${$urlServer}api/assis.php`, $options)
+const getData = ($options, $id) => {
+    fetch(`${$urlServer}api/assis.php?id=${$id}`, $options)
         .then($response => {
             $response.json()
                 .then($itens => {
@@ -326,9 +324,9 @@ const setData = $data => {
     $nome_id.setAttribute('key', $data.id);
     $ep_atual.value = $data.ep_atual;
     $ep_tot.value = $data.ep_tot;
-    $btn_atual_plus.setAttribute('onclick', `changeEpisode("atual", ${$data.id}, "plus")`);
-    $btn_atual_dash.setAttribute('onclick', `changeEpisode("atual", ${$data.id}, "dash")`);
-    $btn_tot_plus.setAttribute('onclick', `changeEpisode("tot", ${$data.id}, "plus")`);
-    $btn_tot_dash.setAttribute('onclick', `changeEpisode("tot", ${$data.id}, "dash")`);
+    $btn_atual_plus.setAttribute('onclick', `changeEpisode("atual", ${$data.id}, "plus", "${$data.nome}")`);
+    $btn_atual_dash.setAttribute('onclick', `changeEpisode("atual", ${$data.id}, "dash", "${$data.nome}")`);
+    $btn_tot_plus.setAttribute('onclick', `changeEpisode("tot", ${$data.id}, "plus", "${$data.nome}")`);
+    $btn_tot_dash.setAttribute('onclick', `changeEpisode("tot", ${$data.id}, "dash", "${$data.nome}")`);
     $edit.removeAttribute('style');
 }

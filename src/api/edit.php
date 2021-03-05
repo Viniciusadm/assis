@@ -31,12 +31,18 @@ if (isset($_POST['episode'])) {
     $type = $_POST['type'];
     $episode = $_POST['episode'];
     $name = $_POST['name'];
+    $id_user = $_POST['id_user'];
+    $operation = $_POST['operation'];
+
+    echo json_encode($name);
 
     $sql = "UPDATE assis SET ep_$type = $episode WHERE id = $id;";
     $connection->query($sql);
 
-    $ocorrencia = "Episódio da coluna $type de $name recebeu $episode";
-    newlog($id_user, $ocorrencia, 'assis');
+    if ($type === 'atual' and $operation === 'plus') {
+        $ocorrencia = "Episódio $episode de $name confirmado";
+        newlog($id_user, $ocorrencia, 'assis', 1);
+    }
 }
 
 if (isset($_FILES['capa'])) {

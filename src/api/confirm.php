@@ -17,7 +17,7 @@ $sql = "UPDATE assis SET ep_atual = $ep_atual + 1 WHERE nome_id = '$nomeAssis';"
 $episodio = $ep_atual + 1;
 
 $connection->query($sql);
-$ocorrencia = "Episódio $episodio de $nome assistido";
+$ocorrencia = "Episódio $episodio de $nome confirmado";
 
 if ($assis['link'] != null) {
     $episode = strval($episodio);
@@ -27,4 +27,4 @@ if ($assis['link'] != null) {
     $connection->query($sql);
 }
 
-newlog($id_user, $ocorrencia, 'assis');
+newlog($id_user, $ocorrencia, 'assis', 1);

@@ -2,8 +2,8 @@
 require_once realpath(dirname(__FILE__) . "/../config/connection.php");
 header("Access-Control-Allow-Origin: *");
 
-if (isset($_POST['id'])) {
-    $id = $_POST['id'];
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
     $sql = "SELECT * FROM assis where id = $id";
     $result = $connection->query($sql);
     $assis = $result->fetch_assoc();

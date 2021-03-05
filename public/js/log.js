@@ -42,9 +42,14 @@ const mountPage = $logs => {
         $logs_div.innerHTML = 'Nada encontrado'
     } else if ($logs !== 'not_assis') {
         let $content = '';
-        $logs.forEach($log => {
-            $content += `<p>${$log.occurrence}</p>
-            <p>Horário: ${$log.time}</p>`;
+        $logs.forEach(($log, $index) => {
+            if ($index === 0) {
+                $content += `<p>${$log.count_today} episódios</p>`;
+            } else if ($index === 1) {
+                $content += `<p>${$log.count} episódios totais</p>`
+            } else if ($index > 1) {
+                $content += `<p>${$log.occurrence}</p> <p>Horário: ${$log.time}</p>`
+            }
         });
         $logs_div.innerHTML = $content;    
     }
