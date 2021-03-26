@@ -12,17 +12,21 @@ $assis = $result->fetch_assoc();
 $ep_atual = $assis['ep_atual'];
 $nome = $assis['nome'];
 
-$sql = "UPDATE assis SET ep_atual = $ep_atual + 1 WHERE nome_id = '$nomeAssis';";
+if (isset($_POST['episode'])) {
+    $episode = $_POST['episode'];
+} elseif (!isset($_POST['episode'])) {
+    $episode = $ep_atual + 1;
+}
 
-$episodio = $ep_atual + 1;
+$sql = "UPDATE assis SET ep_atual = $episode WHERE nome_id = '$nomeAssis';";
 
 $connection->query($sql);
-$ocorrencia = "Episódio $episodio de $nome confirmado";
+$ocorrencia = "Episódio $episode de $nome confirmado";
 
 if ($assis['link'] != null) {
-    $episode = strval($episodio);
-    if (strlen($episode) === 1) $episode = "0" . $episode;
-    $link = str_replace('$episodio', $episode, $assis['link']);
+    $episode_link = strval($episode);
+    if (strlen($episode_link) === 1) $episode_link = "0" . $episode_link;
+    $link = str_replace('$episodio', $episode_link, $assis['link']);
     $sql = "UPDATE links SET link = '$link' WHERE id = 1;";
     $connection->query($sql);
 }

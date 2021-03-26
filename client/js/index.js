@@ -90,7 +90,7 @@ $btnConfirm.addEventListener('click', () => {
         body: $form_data
     };
     
-    fetch(`${$urlServer}api/confirm.php?`, $options)
+    fetch(`${$urlServer}api/confirm.php`, $options)
         .then($response => {
             if($response.status == 200){
                 window.location.href = `${$url}pages/confirm_assis.html`;
