@@ -27,28 +27,16 @@
                 <label for="nome">Nome <span class="asterisk">*</span></label>
                 <input type="text" id="nome">
             </div>
-            <input type="text" id="nome_id" readonly style="display: none;">
-            <div class="part">
-                <label for="ep_atual">Episódio Atual <span class="asterisk">*</span></label>
-                <input type="text" value="0" maxlength="3" id="ep_atual" pattern="[0-9]+">
-            </div>
-            <div class="part">
-                <label for="ep_tot">Episódios Totais <span class="asterisk">*</span></label>
-                <input type="text" id="ep_tot" maxlength="3" pattern="[0-9]+">
-            </div>
             <div class="part">
                 <label for="type">Tipo <span class="asterisk">*</span></label>
                 <select id="type">
-                    <option value="anime" selected>Anime</option>
-                    <option value="desenho">Desenho</option>
-                    <option value="dorama">Dorama</option>
-                    <option value="filme">Filme</option>
+                    <option value="filme" selected>Filme</option>
                     <option value="serie">Série</option>
                 </select>
             </div>
-            <div class="part">
-                <label id="label_image" for="input_image"><p>Imagem</p><img src="../images/image.svg" id="image_upload" alt="Image Upload"></label>
-                <input type="file" id="input_image">
+            <div class="part" id="div_episode" style="display: none;">
+                <label for="episode">Episódio<span class="asterisk">*</span></label>
+                <input type="text" value="1" maxlength="4" id="episode" pattern="[0-9]+">
             </div>
             <div class="part">
                 <button class="button" type="button" id="add">Adicionar</button>
@@ -59,6 +47,6 @@
         </form>
     </div>
     <script src="../js/script.js"></script>
-    <script src="../js/new.js"></script>
+    <script src="../js/direct.js"></script>
 </body>
 </html>

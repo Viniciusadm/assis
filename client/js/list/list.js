@@ -37,13 +37,18 @@ const showCheckbox = ($checkbox, $storage, $type) => {
     const $checked = $checkbox.hasAttribute('checked');
     const $divs = document.querySelectorAll(`[status="${$type}"]`);
     if ($checked === true) {
-        $checkbox.removeAttribute('checked');
-        localStorage.setItem($storage, false);
-        $divs.forEach($div => {
-            $div.setAttribute('style', 'display: none;');
-            const $title = $div.children[0].children[1].children[0];
-            $title.setAttribute('hide', '');
-        });
+        const $checkeds = getCheckboxIds();
+        if ($checkeds >= 2) {
+            $checkbox.removeAttribute('checked');
+            localStorage.setItem($storage, false);
+            $divs.forEach($div => {
+                $div.setAttribute('style', 'display: none;');
+                const $title = $div.children[0].children[1].children[0];
+                $title.setAttribute('hide', '');
+            });
+        } else if ($checkeds === 1) {
+            $checkbox.checked = true;
+        }
     } else if ($checked === false) {
         $checkbox.setAttribute('checked', '');
         localStorage.setItem($storage, true);
@@ -55,23 +60,42 @@ const showCheckbox = ($checkbox, $storage, $type) => {
     }
 }
 
+const getCheckboxIds = () => {
+    const $watching_checkbox_id = $watching_checkbox.hasAttribute('checked') ? 1 : 0;
+    const $deactivate_checkbox_id = $deactivate_checkbox.hasAttribute('checked') ? 1 : 0;
+    const $finished_checkbox_id = $finished_checkbox.hasAttribute('checked') ? 1 : 0;
+    const ids = [$watching_checkbox_id, $deactivate_checkbox_id, $finished_checkbox_id].filter(value => {
+        return value === 1
+    });
+    return ids.length
+}
+
 const mountCheckbox = () => {
-    if ($deactivate_checkbox_status === 'true') {
+    if (localStorage.getItem('deactivate_checkbox') || localStorage.getItem('activate_checkbox') || localStorage.getItem('finished_checkbox')) {
+        if ($deactivate_checkbox_status === 'true') {
+            $deactivate_checkbox.setAttribute('checked', '');
+        } else if ($deactivate_checkbox_status === 'false') {
+            $deactivate_checkbox.removeAttribute('checked');
+        }
+    
+        if ($finished_checkbox_status === 'true') {
+            $finished_checkbox.setAttribute('checked', '');
+        } else if ($finished_checkbox_status === 'false') {
+            $finished_checkbox.removeAttribute('checked');
+        }
+    
+        if ($watching_checkbox_status === 'true') {
+            $watching_checkbox.setAttribute('checked', '');
+        } else if ($watching_checkbox_status === 'false') {
+            $watching_checkbox.removeAttribute('checked');
+        }
+    } else if (!localStorage.getItem('deactivate_checkbox') && !localStorage.getItem('activate_checkbox') && !localStorage.getItem('finished_checkbox')) {
+        localStorage.setItem('deactivate_checkbox', true);
+        localStorage.setItem('activate_checkbox', true);
+        localStorage.setItem('finished_checkbox', true);
         $deactivate_checkbox.setAttribute('checked', '');
-    } else if ($deactivate_checkbox_status === 'false') {
-        $deactivate_checkbox.removeAttribute('checked');
-    }
-
-    if ($finished_checkbox_status === 'true') {
         $finished_checkbox.setAttribute('checked', '');
-    } else if ($finished_checkbox_status === 'false') {
-        $finished_checkbox.removeAttribute('checked');
-    }
-
-    if ($watching_checkbox_status === 'true') {
         $watching_checkbox.setAttribute('checked', '');
-    } else if ($watching_checkbox_status === 'false') {
-        $watching_checkbox.removeAttribute('checked');
     }
 }
 
@@ -127,6 +151,10 @@ const mountPage = () => {
                 if ($itens !== 'not_assis') {
                     let $conteudo = '';
                     for (const $assis of $itens) {
+                        if ($assis.type === 'anime') var $type = 'Anime';
+                        if ($assis.type === 'desenho') var $type = 'Desenho';
+                        if ($assis.type === 'serie') var $type = 'Série';
+                        if ($assis.type === 'dorama') var $type = 'Dorama';
                         const $types = $assis.type.replace(',', ' ');
                         if (Number($assis.status) === 1) {
                             var $status = 'Assistindo';
@@ -148,6 +176,7 @@ const mountPage = () => {
                                 <div class="head">
                                     <h3 id="titulo${$assis.id}" class="titulo">${$assis.nome}</h3>
                                     <input class="episodio" type="text" id="episode${$assis.id}" value="Episódios: ${$assis.ep_atual}/${$assis.ep_tot}" disabled>
+                                    <input class="type" type="text" id="type${$assis.id}" value="Tipo: ${$type}" disabled>
                                 </div>
         
                                 <div class="div_icon_editar">

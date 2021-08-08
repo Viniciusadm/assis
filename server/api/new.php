@@ -8,6 +8,7 @@ $nome = $_POST['nome'];
 $nome_id = $_POST['nome_id'];
 $ep_atual = $_POST['ep_atual'];
 $ep_tot = $_POST['ep_tot'];
+$type = $_POST['type'];
 $id_user = $_POST['id_user'];
 $user_actual = $_POST['user_actual'];
 
@@ -25,10 +26,6 @@ if (isset($_FILES) && isset($_FILES['capa'])) {
     copy($pastaImagem, $pastaUpload . $nome_id . ".jpg");
 }
 
-$sql = "INSERT INTO assis (nome, nome_id, ep_atual, ep_tot, id_user) values ('$nome', '$nome_id', $ep_atual, $ep_tot, $id_user);";
-
+$sql = "INSERT INTO assis (nome, nome_id, ep_atual, ep_tot, id_user, type) values ('$nome', '$nome_id', $ep_atual, $ep_tot, $id_user, '$type');";
+echo json_encode($sql);
 $connection->query($sql);
-
-$ocorrencia = "$nome criado";
-
-newlog($id_user, $ocorrencia, 'assis');

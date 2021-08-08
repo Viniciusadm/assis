@@ -13,9 +13,9 @@ if ($result->num_rows > 0) {
         $nomes[] = ['name' => $resultado['nome'], 'missing' => $resultado['missing']];
     }
 
-    if ($prop == true) {
+    if ($prop == 'true') {
         $name = randomProp($nomes);
-    } elseif ($prop == false) {
+    } elseif ($prop == 'false') {
         $name = random($nomes);
     }
 

@@ -1,5 +1,6 @@
-const $card = document.querySelector('#container_card');
-const $sortCard = document.querySelector('#container_sort_card');
+const $container_card = document.querySelector('#container_card');
+const $card = document.querySelector('#card');
+const $container_sort_card = document.querySelector('#container_sort_card');
 const $capa = document.querySelector('#capa');
 const $titulo = document.querySelector('#titulo');
 const $ep_atual = document.querySelector('#ep_atual');
@@ -8,12 +9,14 @@ const $nome_id = document.querySelector('#nome_id');
 const $btnSort = document.querySelector('#sort');
 const $btnConfirm = document.querySelector('#confirm');
 const $btnChangePage = document.querySelector('#button_sort_card');
+const $button_new = document.querySelector('#button_new');
 const $loading = document.querySelector('#img_loading');
 const $return = document.querySelector('#span_button_voltar');
 const $nav_index = document.querySelector('#nav_index');
 const $div_error_assis = document.querySelector('#div_error_assis');
 const $sort_card_buttons = document.querySelector('#sort_card_buttons');
 const $buttons_choice_div = document.querySelector('#buttons_choice_div');
+const $buttons_new_div = document.querySelector('#buttons_new_div');
 const $button_prop = document.querySelector('#button_prop');
 const $button_normal = document.querySelector('#button_normal');
 
@@ -22,14 +25,16 @@ if ($id_user === "1") {
     $sort_card_buttons.insertAdjacentHTML('beforeend', $button);
 }
 
-const pegarAssis = ($prop) => {
+const sortPage = ($prop) => {
     $return.removeAttribute('style');
-    $sortCard.setAttribute('style' , 'display: none;');
+    $container_sort_card.setAttribute('style' , 'display: none;');
     $loading.removeAttribute('style');
-    
+    $btnSort.setAttribute('onclick', `pegarAssis('${$prop}')`);
+    pegarAssis($prop);
+}
+
+const pegarAssis = ($prop) => {
     const $form_data = new FormData();
-    console.log($id_user);
-    console.log($prop);
     $form_data.append('id_user', $id_user);
     $form_data.append('prop', $prop);
 
@@ -49,11 +54,11 @@ const pegarAssis = ($prop) => {
                 $ep_atual.innerHTML = `Próximo Episódio: <span class="episodeDestaque">${Number($itens['ep_atual']) + 1}</span>`;
                 $ep_tot.innerHTML = `Total: <span class="episodeDestaque">${$itens['ep_tot']}</span>`;
                 $nome_id.value = $itens['nome_id'];
-                $card.removeAttribute('style');
+                $container_card.removeAttribute('style');
                 $loading.setAttribute('style' , 'display: none;');
             } else if ($itens === 'not_assis') {
                 $div_error_assis.removeAttribute('style');
-                $loading.setAttribute('style' , 'dis2play: none;');
+                $loading.setAttribute('style' , 'display: none;');
             }
         });
     });
@@ -62,10 +67,10 @@ const pegarAssis = ($prop) => {
 $return.addEventListener('click', () => {
     $buttons_choice_div.setAttribute('style', 'display: none;');
     $btnChangePage.removeAttribute('style');
-    $card.setAttribute('style', 'display: none;');
+    $container_card.setAttribute('style', 'display: none;');
     $return.setAttribute('style', 'display: none;');
     $div_error_assis.setAttribute('style' , 'display: none;');
-    $sortCard.removeAttribute('style');
+    $container_sort_card.removeAttribute('style');
 })
 
 $btnChangePage.addEventListener('click', () => {
@@ -73,8 +78,9 @@ $btnChangePage.addEventListener('click', () => {
     $btnChangePage.setAttribute('style', 'display: none;')
 });
 
-$btnSort.addEventListener('click', () => {
-    pegarAssis($card);
+$button_new.addEventListener('click', () => {
+    $buttons_new_div.removeAttribute('style');
+    $button_new.setAttribute('style', 'display: none;')
 });
 
 $btnConfirm.addEventListener('click', () => {

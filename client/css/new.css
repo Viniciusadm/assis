@@ -17,6 +17,7 @@
 
 .part > label {
     font-size: 1.2rem;
+    padding: 0.2rem 0;
 }
 
 .part > button {
@@ -25,11 +26,15 @@
     width: initial;
 }
 
-.part > input {
+.part > input, select {
     border: 2px solid black;
     border-radius: 0.2rem;
     height: 3rem;
     font-size: 1.1rem;
+}
+
+.part > select {
+    background-color: white;
 }
 
 .part > input:focus {

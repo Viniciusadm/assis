@@ -1,7 +1,7 @@
 const $url = 'http://assis.surge.sh/';
 const $urlServer = 'http://viniciusadm.000webhostapp.com/assis/';
-// const $url = 'http://localhost:8000/';
-// const $urlServer = 'http://localhost:8001/';
+// const $url = 'http://localhost:8001/';
+// const $urlServer = 'http://localhost:8000/';
 const $button_confirm = document.querySelector('#button_confirm');
 const $p_error = document.querySelector('#p_error');
 
@@ -15,28 +15,9 @@ const validation = $user => {
     } else if ($user !== 'not_user') {
         localStorage.setItem('name', $user['name']);
         localStorage.setItem('user', $user['user']);
-        getId($user['user']);
-        window.location.href = $url;
+        localStorage.setItem('id', $user['id']);
+        window.location.replace($url);
     }
-}
-
-const getId = $user => {
-    const $form_data = new FormData();
-    $form_data.append('user', $user);
-
-    const $options = {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'default',
-        body: $form_data
-    };
-
-    fetch(`${$urlServer}api/id.php`, $options)
-        .then($response => { $response.json()
-        .then($id => {
-            localStorage.setItem('id', $id['id']);
-        })
-    })
 }
 
 $button_confirm.addEventListener('click', () => {

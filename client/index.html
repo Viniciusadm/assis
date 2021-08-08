@@ -37,11 +37,15 @@
         <div id="sort_card_buttons">
             <button id="button_sort_card" class="button button_sort_card"><img src="images/tv.svg" alt="sort"> Sortear</button>
             <div id="buttons_choice_div" style="display: none;">
-                <button onclick="pegarAssis(false)" class="button">Normal</button>
-                <button onclick="pegarAssis(true)" class="button">Proporcional</button>
+                <button onclick="sortPage(false)" class="button">Normal</button>
+                <button onclick="sortPage(true)" class="button">Proporcional</button>
             </div>
             <a href="pages/list.html"><button class="button button_sort_card"><img src="images/list.svg" alt="list"> Lista</button></a>
-            <a href="pages/new.html"><button class="button button_sort_card"><img src="images/new.svg" alt="new">Novo</button></a>
+            <a id="button_new"><button class="button button_sort_card"><img src="images/new.svg" alt="new">Novo</button></a>
+            <div id="buttons_new_div" style="display: none;">
+                <a href="pages/new.html"><button class="button">Criar novo</button></a>
+                <a href="pages/direct.html"><button class="button">Inserir log</button></a>
+            </div>
             <a href="pages/log.html"><button class="button button_sort_card"><img src="images/book.svg" alt="new"> Log</button></a>
         </div>
     </div>

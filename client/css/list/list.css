@@ -6,7 +6,7 @@ main {
 .header {
     display: flex;
     flex-direction: row;
-    width: 100vw;
+    width: 100%;
     border-top: 1px solid black;
     padding-top: 0.4rem;
     padding-bottom: 0.4rem;
@@ -20,7 +20,7 @@ main {
 
 .footer {
     background-color: rgba(0, 0, 0, 0.1);
-    width: 100vw;
+    width: 100%;
     font-size: 0.8rem;
     padding-left: 0.3rem;
     padding-right: 0.3rem;
@@ -56,9 +56,10 @@ main {
     width: 1.3rem;
     height: 1.3rem;
     cursor: pointer;
+    user-select: none;
 }
 
-.episodio:disabled {
+.head > input:disabled {
     font-size: 0.8rem;
     background-color: transparent;
     border: none;
@@ -100,4 +101,16 @@ main {
 #filter {
     display: flex;
     flex-direction: row;
+    align-items: center;
+}
+
+#filter > label {
+    margin-right: 0.6rem;
+    user-select: none;
+}
+
+#filter > input {
+    margin-right: 0.15rem;
+    height: 1.125rem;
+    width: 1.125rem;
 }

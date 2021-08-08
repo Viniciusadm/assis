@@ -2,6 +2,7 @@ const $nome = document.querySelector('#nome');
 const $nome_id = document.querySelector('#nome_id');
 const $ep_atual = document.querySelector('#ep_atual');
 const $ep_tot = document.querySelector('#ep_tot');
+const $type = document.querySelector('#type');
 const $buttonAdd = document.querySelector('#add');
 const $file = document.querySelector('#input_image');
 const $image_upload = document.querySelector('#image_upload');
@@ -16,7 +17,7 @@ const removeCharacters = ($string) => {
 }
 
 const checkValues = () => {
-    if ($nome.value && $ep_atual.value && $ep_tot.value) {
+    if ($nome.value && $ep_atual.value && $ep_tot.value && $type.value) {
         return true;
     } else {
         return false;
@@ -47,7 +48,6 @@ $buttonAdd.addEventListener('click', () => {
     .then($response => { 
         $response.json()
             .then($item => {
-                console.log($item);
                 if ($item === 'not_exists') {
                     if (checkValues() === true) {
                         $body.setAttribute('style', 'display: none;')
@@ -57,9 +57,9 @@ $buttonAdd.addEventListener('click', () => {
                         $form_data.append('nome_id', $nome_id.value);
                         $form_data.append('ep_atual', $ep_atual.value);
                         $form_data.append('ep_tot', $ep_tot.value);
+                        $form_data.append('type', $type.value);
                         $form_data.append('capa', $file.files[0]);
                         $form_data.append('id_user', $id_user);
-                        $form_data.append('user_actual', $user_actual);
                     
                         const $options = {
                             method: 'POST',
