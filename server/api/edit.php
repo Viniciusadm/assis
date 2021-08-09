@@ -41,7 +41,7 @@ if (isset($_POST['episode'])) {
 
     if ($type === 'atual' and $operation === 'plus') {
         $ocorrencia = "Episódio $episode de $name confirmado";
-        newlog($id_user, $ocorrencia, 'assis', 1);
+        newlog($id_user, $ocorrencia);
     }
 }
 

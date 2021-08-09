@@ -1,0 +1,91 @@
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.del {
+    margin-top: 0.3rem;
+    color: red;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.del:hover {
+    color: rgb(255, 31, 31);
+}
+
+#menu {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 1rem;
+}
+
+#menu > p {
+    padding: 0.3rem;
+    border-radius: 0.3rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+#menu > input {
+    outline: none;
+    font-size: 1.2rem;
+    padding: 0.3rem;
+    border-radius: 0.3rem;
+    border: 1px black solid;
+}
+
+#inhead {
+    border: black 1px solid;
+    width: 60vw;
+    text-align: center;
+    padding: 1rem;
+}
+
+.log {
+    width: 60vw;
+    text-align: center;
+    padding: 1rem;
+    border-bottom: black 1px solid;
+    border-left: black 1px solid;
+    border-right: black 1px solid;
+}
+
+#err {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+@media (max-width: 600px) {
+    .log {
+        width: 80vw;
+    }
+
+    #inhead {
+        width: 80vw;
+    }
+
+    #menu {
+        flex-direction: column;
+    }
+
+    #menu > input {
+        font-size: 1rem;
+    }
+
+    #menu > p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .log {
+        width: 90vw;
+    }
+
+    #inhead {
+        width: 90vw;
+    }
+}

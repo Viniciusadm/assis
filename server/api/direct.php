@@ -10,4 +10,4 @@ $id_user = $_POST['id_user'];
 if ($type === 'filme') $ocorrencia = "$nome confirmado";
 elseif ($type === 'serie') $ocorrencia = "Episódio $episode de $nome confirmado";
 
-newlog($id_user, $ocorrencia, 'assis', 1);
+newlog($id_user, $ocorrencia);
