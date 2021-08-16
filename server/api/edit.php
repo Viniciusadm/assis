@@ -16,14 +16,15 @@ if (isset($_POST['nome'])) {
     $nome_id_original = $connection->query($sql)->fetch_assoc()['nome_id'];
     $nome_original = $pasta_imagem . '/' . $nome_id_original . '.jpg';
     $nome_novo = $pasta_imagem . '/' . $nome_id . '.jpg';
-    
-    rename($nome_original, $nome_novo);
-
-    $sql = "UPDATE assis SET nome = '$nome' WHERE id = $id;";
-    $connection->query($sql);
 
     $sql = "UPDATE assis SET nome_id = '$nome_id' WHERE id = $id;";
     $connection->query($sql);
+
+    if (!$connection->error) {
+        $sql = "UPDATE assis SET nome = '$nome' WHERE id = $id;";
+        $connection->query($sql);
+        rename($nome_original, $nome_novo);
+    } else if (($connection->error)) echo json_encode('duplicate_key');
 }
 
 if (isset($_POST['episode'])) {

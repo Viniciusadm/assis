@@ -9,9 +9,9 @@ if (isset($_GET['id'])) {
     $assis = $result->fetch_assoc();
 }
 
-if (isset($_POST['nome_id'])) {
-    $id_user = $_POST['id_user'];
-    $nome_id = $_POST['nome_id'];
+if (isset($_GET['nome_id'])) {
+    $id_user = $_GET['id_user'];
+    $nome_id = $_GET['nome_id'];
     $sql = "SELECT * FROM assis where nome_id = '$nome_id' and id_user = $id_user";
     $result = $connection->query($sql);
     if ($result->num_rows > 0) {
@@ -21,8 +21,8 @@ if (isset($_POST['nome_id'])) {
     }
 }
 
-if (isset($_POST['id_user']) && !isset($_POST['nome_id'])) {
-    $id_user = $_POST['id_user'];
+if (isset($_GET['id_user']) && !isset($_GET['nome_id'])) {
+    $id_user = $_GET['id_user'];
     $sql = "SELECT * FROM assis where id_user = $id_user order by nome";
     $result = $connection->query($sql);
     
@@ -35,4 +35,8 @@ if (isset($_POST['id_user']) && !isset($_POST['nome_id'])) {
     }
 } 
 
-echo json_encode($assis);
+if (isset($assis)) {
+    echo json_encode($assis);
+} else {
+    echo json_encode('not_assis');
+}

@@ -66,7 +66,7 @@ function randomProp($nomes) {
     }
 
     $name_choice = $nomes[$choice]['name'];
-    return $name_choice;
+    return $nomes;
 }
 
 function random($nomes) {
