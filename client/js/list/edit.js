@@ -5,6 +5,7 @@ const $capa_editar = document.querySelector('#capa_editar');
 // Divs
 const $list = document.querySelector('#list');
 const $edit = document.querySelector('#edit_all_nav');
+const $p_error = document.querySelector('#p_error');
 // Inputs
 const $nome = document.querySelector('#nome');
 const $nome_id = document.querySelector('#nome_id');
@@ -20,19 +21,23 @@ const $button_voltar_edit = document.querySelector('#button_voltar_edit');
 const $edit_image = document.querySelector('#edit_image');
 const $confirm_edit_image = document.querySelector('#confirm_edit_image');
 const $button_finish = document.querySelector('#button_finish');
+const $confirm_edit = document.querySelector('#confirm_edit');
 
 // Eventos
 
 $nome.addEventListener('input', () => {
+    $confirm_edit.removeAttribute('style');
+    $button_finish.setAttribute('style', 'display: none;')
     $nome_id.value = removeCharacters($nome.value);
+});
+
+$confirm_edit.addEventListener('click', () => {
     const $id = $nome_id.getAttribute('key');
     const $nome_value = $nome.value;
-    const $img_capa = document.querySelector(`#img_capa${$id}`);
-    $img_capa.setAttribute('onclick', `edit('${$id}')`);
-    $form_data = new FormData();
-    $form_data.append('nome', $nome_value);
+
+    const $form_data = new FormData();
     $form_data.append('nome_id', $nome_id.value);
-    $form_data.append('id', $id)
+    $form_data.append('id_user', $id_user);
 
     const $options = {
         method: 'POST',
@@ -40,7 +45,33 @@ $nome.addEventListener('input', () => {
         cache: 'default',
         body: $form_data
     }
-    submitName($options, $id, $nome_value);
+
+    fetch(`${$urlServer}api/assis.php`, $options)
+        .then($response => {
+            $response.json()
+                .then($item => {
+                    if ($item === 'not_exists') {
+                        $confirm_edit.setAttribute('style', 'display: none;')
+                        $button_finish.removeAttribute('style');
+                        $p_error.innerText = '';
+
+                        $form_data.append('nome', $nome_value);
+                        $form_data.append('id', $id)
+                        $form_data.append('user_actual', $user_actual)
+
+                        const $options = {
+                            method: 'POST',
+                            mode: 'cors',
+                            cache: 'default',
+                            body: $form_data
+                        }
+                        
+                        submitName($options, $id, $nome_value);
+                    } else {
+                        $p_error.innerText = 'Item já existente';
+                    }
+                })
+            })
 })
 
 $input_edit_image.addEventListener('change', () => {
@@ -61,6 +92,7 @@ $confirm_edit_image.addEventListener('click', () => {
     const $form_data = new FormData();
     $form_data.append('capa', $capa_load);
     $form_data.append('nome_id', $nome_id_value);
+    $form_data.append('user_actual', $user_actual);
     $form_data.append('id_user', $id_user);
 
     $options = {
@@ -73,7 +105,7 @@ $confirm_edit_image.addEventListener('click', () => {
     fetch(`${$urlServer}api/edit.php`, $options)
         .then($response => {
             if ($response.status === 200) {
-                document.location.reload(true);
+                document.location.reload();
             }
         })
 
@@ -182,7 +214,6 @@ const floating_screen = $callback => {
 // Funções Evento
 
 const finish = ($id, $type_finish) => {
-
     if ($type_finish === 'finish') {
         $titulo_confirm.innerText = `Certeza que deseja finalizar?`;
         floating_screen(() => {

@@ -9,10 +9,12 @@ main {
     color: red;
     font-weight: bold;
     cursor: pointer;
+    user-select: none;
+    
 }
 
 .del:hover {
-    color: rgb(255, 31, 31);
+    color: rgb(199, 0, 0);
 }
 
 #menu {

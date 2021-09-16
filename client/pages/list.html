@@ -106,9 +106,10 @@
                         </div>
                         <div id="nomes">
                             <label for="nome">Nome</label>
-                            <input maxlength="25" id="nome" type="text">
+                            <input id="nome" type="text">
                             <label for="nome_id">Nome ID</label>
                             <input id="nome_id" type="text" disabled>
+                            <p id="confirm_edit" style="display: none;">Confirmar edição</p>
                             <p id="button_finish"></p>
                         </div>
                     </div>
@@ -127,6 +128,9 @@
                                 <button type="button" class="button button_episode" id="btn_tot_dash">-</button>
                             </div>
                         </div>
+                    </div>
+                    <div id="error">
+                        <p class="asterisk" id="p_error"></p>
                     </div>
                 </div>
             </div>
