@@ -14,6 +14,16 @@
     width: 37.5vw;
 }
 
+.button_sort_card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button_sort_card img {
+    margin-right: 0.2rem;
+}
+
 @media (min-width: 700px) {
     .button_sort_card {
         width: 50vw;

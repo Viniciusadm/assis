@@ -136,17 +136,14 @@ const deactivate = ($id, $type) => {
 
 const mountPage = () => {
     mountCheckbox();
-    const $form_data = new FormData();
-    $form_data.append('id_user', $id_user);
-
+    
     const $options = {
-        method: 'POST',
+        method: 'GET',
         mode: 'cors',
         cache: 'default',
-        body: $form_data
     };
     
-    fetch(`${$urlServer}api/assis.php`, $options).then($response => {
+    fetch(`${$urlServer}api/assis.php?id_user="${Number($id_user)}"`, $options).then($response => {
             $response.json().then($itens => {
                 if ($itens !== 'not_assis') {
                     let $conteudo = '';
@@ -155,6 +152,7 @@ const mountPage = () => {
                         if ($assis.type === 'desenho') var $type = 'Desenho';
                         if ($assis.type === 'serie') var $type = 'Série';
                         if ($assis.type === 'dorama') var $type = 'Dorama';
+                        if ($assis.type === 'filme') var $type = 'Filme';
                         const $types = $assis.type.replace(',', ' ');
                         if (Number($assis.status) === 1) {
                             var $status = 'Assistindo';

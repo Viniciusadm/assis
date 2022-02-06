@@ -33,25 +33,20 @@ $nome.addEventListener('input', () => {
 })
 
 $buttonAdd.addEventListener('click', () => {
-    const $form_data = new FormData();
-    $form_data.append('nome_id', $nome_id.value);
-    $form_data.append('id_user', $id_user);
-
     const $options = {
-        method: 'POST',
+        method: 'GET',
         mode: 'cors',
         cache: 'default',
-        body: $form_data
-    }
-
-    fetch(`${$urlServer}api/assis.php`, $options)
+    };
+    
+    fetch(`${$urlServer}api/assis.php?id_user="${$id_user}&nome_id=${$nome_id.value}"`, $options)
     .then($response => { 
         $response.json()
             .then($item => {
                 if ($item === 'not_exists') {
                     if (checkValues() === true) {
                         $body.setAttribute('style', 'display: none;')
-                        $img_loading.removeAttribute('style');
+                        // $img_loadig.removeAttribute('style');
                         const $form_data = new FormData();
                         $form_data.append('nome', $nome.value);
                         $form_data.append('nome_id', $nome_id.value);
@@ -60,6 +55,7 @@ $buttonAdd.addEventListener('click', () => {
                         $form_data.append('type', $type.value);
                         $form_data.append('capa', $file.files[0]);
                         $form_data.append('id_user', $id_user);
+                        $form_data.append('user_actual', $user_actual);
                     
                         const $options = {
                             method: 'POST',

@@ -26,6 +26,22 @@
     background-color: gray;
 }
 
+#confirm_edit {
+    background-color: transparent;
+    color: red;
+    border: none;
+    margin-top: 0.7rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 0.1rem;
+    cursor: pointer;
+    text-align: start;
+}
+
+#confirm_edit:hover {
+    color: rgb(255, 50, 50);
+}
+
 #button_voltar_edit {
     cursor: pointer;
 }
@@ -144,5 +160,5 @@
 }
 
 .status_edit:hover {
-    color: cornsilk;
+    color: rgb(255, 50, 50);
 }
