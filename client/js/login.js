@@ -1,5 +1,5 @@
 // const $url = 'http://assis.surge.sh/';
-// const $urlServer = 'https://manager-life.herokuapp.com/';
+// const $urlServer = 'http://viniciusadm.000webhostapp.com/assis/';
 const $url = 'http://localhost:8000/';
 const $urlServer = 'http://localhost:8001/';
 const $button_confirm = document.querySelector('#button_confirm');
